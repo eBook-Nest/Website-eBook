@@ -35,17 +35,16 @@
     .container {
       padding: 20px;
       display: flex;
-      flex-direction: column; /* Agar setiap buku berada dalam kolom */
-      gap: 0px; /* Menghilangkan jarak antar elemen */
+      flex-direction: column; /* Default untuk mobile */
+      gap: 10px; /* Mengatur jarak antar elemen */
     } 
     .container > * {
-        margin: 3;
-        padding: 3;
-      }
-      
-      .book, .post {
-        margin-bottom: 10px; /* Atur sesuai kebutuhan, bisa 0px jika perlu */
-      }     
+      margin: 3;
+      padding: 3;
+    }
+    .book, .post {
+      margin-bottom: 10px;
+    }     
     .book {
       background-color: #1e1e1e;
       padding: 20px;
@@ -55,11 +54,11 @@
       gap: 20px;
       align-items: flex-start;
       flex-direction: row;  /* Menjaga gambar di kiri dan konten di kanan */
-      margin-bottom: 0; /* Menghilangkan margin bawah pada setiap elemen */
+      margin-bottom: 0;
     }
     .book-content {
       flex: 1;
-      border-left: 2px solid #444;  /* Menambahkan garis vertikal */
+      border-left: 2px solid #444; 
       padding-left: 20px;
     }
     .book img {
@@ -77,12 +76,12 @@
     .download-btn {
       display: inline-block;
       padding: 10px 15px;
-      background-color: #000000;  /* Set background color to black */
+      background-color: #000000;
       color: white;
       text-decoration: none;
       border-radius: 5px;
-      border: 2px solid transparent;  /* Set border to transparent */
-      position: relative;  /* To position the neon glow */
+      border: 2px solid transparent;
+      position: relative;
       overflow: hidden;
       transition: color 0.4s, box-shadow 0.4s;
     }
@@ -94,7 +93,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: #39FF14;  /* Neon green color */
+      background: #39FF14;
       z-index: -1;
       transition: all 0.4s;
       transform: scaleX(0) scaleY(0);
@@ -103,12 +102,12 @@
     }
 
     .download-btn:hover::before {
-      transform: scaleX(1) scaleY(1);  /* Show neon effect on hover */
+      transform: scaleX(1) scaleY(1);
     }
 
     .download-btn:hover {
-      color: #39FF14;  /* Change text color to neon green on hover */
-      box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14;  /* Neon glow effect */
+      color: #39FF14;
+      box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14;
     }
 
     .category-container {
@@ -119,9 +118,9 @@
     #category-select {
       padding: 10px 15px;
       font-size: 14px;
-      background-color: #000; /* black background */
-      color: #39FF14; /* neon green text */
-      border: 2px solid #39FF14; /* neon border */
+      background-color: #000;
+      color: #39FF14;
+      border: 2px solid #39FF14;
       border-radius: 8px;
       outline: none;
       box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14;
@@ -139,13 +138,45 @@
       background-color: #121212;
       color: white;
     }
-      
+
+    /* Mobile-first: Default untuk tampilan HP */
+    .container {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .book {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    /* Untuk tablet dan atas (min-width: 768px) */
+    @media (min-width: 768px) {
+      .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .book {
+        width: 48%; /* Dua kolom di tablet */
+      }
+    }
+
+    /* Untuk desktop (min-width: 1024px) */
+    @media (min-width: 1024px) {
+      .book {
+        width: 100%; /* Tiga kolom di desktop */
+      }
+    }
       
   </style>
 </head>
 <body>
   <header>
     <h1>eBook Nest</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </header>
 
   <div class="search-container">
