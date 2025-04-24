@@ -35,16 +35,16 @@
     .container {
       padding: 20px;
       display: flex;
-      flex-direction: column; /* Default untuk mobile */
-      gap: 10px; /* Mengatur jarak antar elemen */
-    } 
-    .container > * {
-      margin: 3;
-      padding: 3;
+      flex-direction: column;
+      gap: 0px;
     }
+    .book {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }      
     .book, .post {
       margin-bottom: 10px;
-    }     
+    }
     .book {
       background-color: #1e1e1e;
       padding: 20px;
@@ -53,12 +53,11 @@
       display: flex;
       gap: 20px;
       align-items: flex-start;
-      flex-direction: row;  /* Menjaga gambar di kiri dan konten di kanan */
-      margin-bottom: 0;
+      flex-direction: row;
     }
     .book-content {
       flex: 1;
-      border-left: 2px solid #444; 
+      border-left: 2px solid #444;
       padding-left: 20px;
     }
     .book img {
@@ -73,6 +72,13 @@
     .book p {
       line-height: 1.6;
     }
+    .button-container {
+        display: flex;
+        gap: 10px; /* Jarak antar tombol */
+        margin-top: 15px; /* Jarak dari konten atas */
+        flex-wrap: wrap; /* Supaya responsif kalau layarnya kecil */
+      }      
+
     .download-btn {
       display: inline-block;
       padding: 10px 15px;
@@ -110,66 +116,40 @@
       box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14;
     }
 
-    .category-container {
-      margin-top: 10px;
-      text-align: center;
-    }
-
-    #category-select {
-      padding: 10px 15px;
-      font-size: 14px;
-      background-color: #000;
-      color: #39FF14;
-      border: 2px solid #39FF14;
-      border-radius: 8px;
-      outline: none;
-      box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    #category-select:hover {
-      box-shadow: 0 0 8px #39FF14, 0 0 16px #39FF14;
-      color: #ffffff;
-      background-color: #111;
-    }
-
-    #category-select option {
-      background-color: #121212;
-      color: white;
-    }
-
-    /* Mobile-first: Default untuk tampilan HP */
-    .container {
-      display: flex;
-      flex-direction: column;
-      padding: 10px;
-    }
-
-    .book {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-
-    /* Untuk tablet dan atas (min-width: 768px) */
-    @media (min-width: 768px) {
-      .container {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 20px;
+    .deskripsi-btn {
+        background-color: #000000;
+        color: white;
+        border-radius: 5px;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+        transition: color 0.4s, box-shadow 0.4s;
       }
-
-      .book {
-        width: 48%; /* Dua kolom di tablet */
+      
+      .deskripsi-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #39FF14;
+        z-index: -1;
+        transition: all 0.4s;
+        transform: scaleX(0) scaleY(0);
+        transform-origin: bottom right;
+        border-radius: 5px;
       }
-    }
-
-    /* Untuk desktop (min-width: 1024px) */
-    @media (min-width: 1024px) {
-      .book {
-        width: 100%; /* Tiga kolom di desktop */
+      
+      .deskripsi-btn:hover::before {
+        transform: scaleX(1) scaleY(1);
       }
-    }
+      
+      .deskripsi-btn:hover {
+        color: #39FF14;
+        box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14;
+      }
+      
       
   </style>
 </head>
@@ -207,357 +187,599 @@
       <div class="book-content">
         <h2>Sapiens: A Brief History of Humankind</h2>
         <p><strong>Penulis:</strong> Yuval Noah Harari</p>
-        <p>Buku ini membahas sejarah umat manusia dari masa purba hingga modern, mengupas perubahan besar dalam revolusi kognitif, pertanian, hingga era sains modern.</p>
-        <a class="download-btn" href="/path/to/Sapiens_Yuval_Noah_Harari.pdf" download>Download PDF</a>
+        <p><strong>Tag:</strong> Sejarah, Sains, Filsafat</p>
+        <div class="button-container">
+            <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+<div>
+    <a class="download-btn" href="/path/to/Sapiens_Yuval_Noah_Harari.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            Di awal, buku ini menjelaskan bagaimana terjadinya tiga peristiwa besar yang membentuk peradaban manusia hingga bisa sampai pada titik seperti saat sekarang ini. Yaitu revolusi kognitif, revolusi agrikultur dan revolusi ilmu pengetahuan.
+          </div>          
       </div>
     </div>
   </div>
 
   <div class="container">
     <!-- The Righteous Mind -->
-<div class="book" data-category="Psikologi Sosial & Politik">
-    <img src="image/the_righteous_mind.jpg" alt="The Righteous Mind Cover">
-    <div class="book-content">
-      <h2>The Righteous Mind</h2>
-      <p><strong>Penulis:</strong> Jonathan Haidt</p>
-      <p>Buku ini membahas bagaimana dan mengapa orang-orang memiliki pandangan moral yang berbeda, serta bagaimana pembagian ini memengaruhi politik dan agama di seluruh dunia.</p>
-      <a class="download-btn" href="/path/to/The_Righteous_Mind_Jonathan_Haidt.pdf" download>Download PDF</a>
-    </div>
-  </div>  
-
-  <div class="container">
-    <div class="book" data-category="Filsafat Pengembangan-Diri"> 
-    <img src="image/teras.jpg" alt="Teras Cover">
-    <div class="book-content">
-      <h2>Filosofi Teras : Filsafat Yunani-Romawi Kuno Untuk Mental Tangguh Masa Kini</h2>
-      <p><strong>Penulis:</strong> Hendri Manampiring</p>
-      <p>Buku ini mengajak kita untuk hidup lebih bijak dengan menerapkan filosofi Stoikisme dalam kehidupan sehari-hari, membantu kita dalam menghadapi berbagai tantangan hidup.</p>
-      <a class="download-btn" href="/path/to/Sapiens_Yuval_Noah_Harari.pdf" download>Download PDF</a>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-<div class="book" data-category="Ekonomi Pengembangan Diri">
-    <img src="image/think_and_grow_rich.jpg" alt="Think and Grow Rich Cover">
-    <div class="book-content">
-      <h2>Think and Grow Rich</h2>
-      <p><strong>Penulis:</strong> Napoleon Hill</p>
-      <p>Salah satu buku klasik pengembangan diri dan finansial paling berpengaruh sepanjang masa.</p>
-      <a class="download-btn" href="/path/to/Think_And_Grow_Rich_Napoleon_Hill.pdf" download>Download PDF</a>
-    </div>
-  </div>
-  <div>
-
-    <div class="container"></div>
-    <div class="book" data-category="Pengembangan Diri Psikologi">
-        <img src="image/atomic_habits.jpg" alt="Atomic Habits Cover">
-        <div class="book-content">
-          <h2>Atomic Habits</h2>
-          <p><strong>Penulis:</strong> James Clear</p>
-          <p>Buku ini menawarkan strategi praktis untuk membentuk kebiasaan baik, menghentikan kebiasaan buruk, dan menguasai perilaku sehari-hari demi hasil luar biasa.</p>
-          <a class="download-btn" href="/path/to/Atomic_Habits_James_Clear.pdf" download>Download PDF</a>
+    <div class="book" data-category="Psikologi Sosial & Politik">
+      <img src="image/righteous.jpg" alt = "The Righteous Mind Cover">
+      <div class="book-content">
+        <h2>The Righteous Mind</h2>
+        <p><strong>Penulis:</strong> Jonathan Haidt</p>
+        <p><strong>Tag:</strong> Sejarah, Sains, Filsafat</p>
+  
+        <!-- Tombol -->
+        <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <a class="download-btn" href="/path/to/Sapiens_Yuval_Noah_Harari.pdf" download>Download PDF</a>
+        </div>
+  
+        <!-- Deskripsi -->
+        <div class="description">
+          <p> *The Righteous Mind* oleh Jonathan Haidt mengupas bagaimana pemikiran moral manusia berkembang dan bagaimana hal itu membentuk pandangan kita terhadap politik, agama, dan masalah sosial lainnya. Haidt menunjukkan bahwa manusia cenderung membentuk opini moral berdasarkan perasaan emosional dan intuisi, bukan hanya rasionalitas atau logika. Buku ini juga menyarankan bahwa untuk memahami perbedaan pandangan moral antara kelompok yang berbeda, kita harus memperhatikan berbagai aspek psikologis yang membentuk dasar pemikiran moral kita. Haidt menjelaskan tiga bagian utama dari moralitas: intuisi, pertimbangan rasional, dan pengaruh sosial, serta bagaimana hal ini membentuk masyarakat kita.</p>
         </div>
       </div>
     </div>
+  </div>
+  
 
-    <div class="container"></div>
-<div class="book" data-category="Ekonomi Pengembangan Diri">
-    <img src="image/rich_dad_poor_dad.jpg" alt="Rich Dad Poor Dad Cover">
-    <div class="book-content">
-      <h2>Rich Dad Poor Dad</h2>
-      <p><strong>Penulis:</strong> Robert T. Kiyosaki</p>
-      <p>Buku ini membandingkan pola pikir orang kaya dan miskin, serta menekankan pentingnya literasi keuangan dalam mencapai kebebasan finansial.</p>
-      <a class="download-btn" href="/path/to/Rich_Dad_Poor_Dad_Robert_Kiyosaki.pdf" download>Download PDF</a>
+  <div class="container">
+    <!-- Filosofi Teras -->
+    <div class="book" data-category="Filsafat, Pengembangan Diri">
+      <img src="image/teras.jpg" alt="Filosofi Teras Cover">
+      <div class="book-content">
+        <h2>Filosofi Teras</h2>
+        <p><strong>Penulis:</strong> Henry Manampiring</p>
+        <p><strong>Tag:</strong> Filsafat, Pengembangan Diri, Psikologi</p>
+  
+        <!-- Tombol -->
+        <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <a class="download-btn" href="/path/to/Filosofi_Teras_Henry_Manampiring.pdf" download>Download PDF</a>
+        </div>
+  
+        <!-- Deskripsi -->
+        <div class="description">
+          <p>
+            "Filosofi Teras" memperkenalkan filsafat Stoisisme kepada pembaca Indonesia dalam bahasa yang sederhana dan relevan dengan kehidupan modern. 
+            Buku ini menjelaskan bagaimana kita bisa mencapai ketenangan batin dan mengendalikan emosi dengan memahami bahwa hal-hal di luar kendali kita sebaiknya tidak mengganggu kita. 
+            Penulis mengaitkan prinsip-prinsip Stoik kuno seperti milik Marcus Aurelius dan Epictetus dengan berbagai masalah kehidupan sehari-hari, termasuk overthinking, amarah, dan rasa cemas.
+            Cocok untuk siapa saja yang ingin belajar menjadi lebih tenang, rasional, dan bahagia dalam menghadapi tantangan hidup.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
   
-  <div class="container"></div>
-<!-- Emotional Intelligence -->
-<div class="book" data-category="Psikologi Pengembangan Diri">
+  <div class="book" data-category="Pengembangan Diri, Ekonomi">
+    <img src="image/think and grow.jpg" alt="Think and Grow Rich Cover">
+    <div class="book-content">
+      <h2>Think and Grow Rich</h2>
+      <p><strong>Penulis:</strong> Napoleon Hill</p>
+      <p><strong>Tag:</strong> Pengembangan Diri, Ekonomi</p>
+  
+      <!-- Tombol -->
+      <div class="button-container">
+        <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+        <a class="download-btn" href="/path/to/Think_and_Grow_Rich_Napoleon_Hill.pdf" download>Download PDF</a>
+      </div>
+  
+      <!-- Deskripsi -->
+      <div class="description">
+        <p>
+          "Think and Grow Rich" adalah salah satu buku klasik pengembangan diri dan motivasi yang paling berpengaruh sepanjang masa. 
+          Ditulis berdasarkan wawancara dengan lebih dari 500 orang sukses, termasuk Henry Ford, Thomas Edison, dan Andrew Carnegie, buku ini menguraikan prinsip-prinsip mental dan kebiasaan yang membantu seseorang mencapai kekayaan dan kesuksesan.
+          Napoleon Hill menekankan pentingnya kekuatan pikiran, kejelasan tujuan, keyakinan, dan ketekunan sebagai fondasi untuk menciptakan kehidupan yang makmur.
+          Buku ini bukan sekadar tentang menjadi kaya secara finansial, tetapi juga kaya dalam makna hidup dan pencapaian diri.
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="book" data-category="Pengembangan Diri, Psikologi">
+    <img src="image/atomic.jpg" alt="Atomic Habits Cover">
+    <div class="book-content">
+      <h2>Atomic Habits</h2>
+      <p><strong>Penulis:</strong> James Clear</p>
+      <p><strong>Tag:</strong> Pengembangan Diri, Psikologi</p>
+  
+      <!-- Tombol -->
+      <div class="button-container">
+        <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+        <a class="download-btn" href="/path/to/Atomic_Habits_James_Clear.pdf" download>Download PDF</a>
+      </div>
+  
+      <!-- Deskripsi -->
+      <div class="description">
+        <p>
+          "Atomic Habits" adalah panduan revolusioner tentang bagaimana kebiasaan kecil dapat menghasilkan perubahan besar dalam hidup. 
+          James Clear menunjukkan bagaimana mengatasi kebiasaan buruk, membangun kebiasaan baik, dan menyusun sistem untuk berkembang secara konsisten. 
+          Dengan pendekatan ilmiah dan kisah nyata, buku ini menekankan pentingnya perbaikan 1% setiap hari sebagai jalan menuju kesuksesan jangka panjang. 
+          Cocok bagi siapa pun yang ingin menjadi lebih disiplin, produktif, dan terarah dalam mencapai tujuan.
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="book" data-category="Ekonomi, Pengembangan Diri">
+    <img src="image/rich dad.jpg" alt="Rich Dad Poor Dad Cover">
+    <div class="book-content">
+      <h2>Rich Dad Poor Dad</h2>
+      <p><strong>Penulis:</strong> Robert T. Kiyosaki</p>
+      <p><strong>Tag:</strong> Pengembangan Diri, Ekonomi</p>
+  
+      <!-- Tombol -->
+      <div class="button-container">
+        <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+        <a class="download-btn" href="/path/to/Rich_Dad_Poor_Dad_Robert_Kiyosaki.pdf" download>Download PDF</a>
+      </div>
+  
+      <!-- Deskripsi -->
+      <div class="description">
+        <p>
+          "Rich Dad Poor Dad" membandingkan dua sudut pandang tentang uang, investasi, dan kebebasan finansial: 
+          satu dari ayah kandung penulis (Poor Dad) dan satu dari ayah temannya (Rich Dad). 
+          Buku ini menantang banyak pemahaman konvensional tentang pendidikan, pekerjaan, dan tabungan. 
+          Dengan gaya bercerita yang sederhana dan inspiratif, Robert T. Kiyosaki menekankan pentingnya literasi finansial 
+          dan membangun aset untuk mencapai kebebasan keuangan sejati.
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="book" data-category="Psikologi, Pengembangan Diri">
     <img src="image/emotional_intelligence.jpg" alt="Emotional Intelligence Cover">
     <div class="book-content">
       <h2>Emotional Intelligence</h2>
       <p><strong>Penulis:</strong> Daniel Goleman</p>
-      <p>Buku ini menjelaskan bagaimana kecerdasan emosional berperan besar dalam kesuksesan, hubungan sosial, dan pengambilan keputusan, bahkan lebih penting dari IQ.</p>
-      <a class="download-btn" href="/path/to/Emotional_Intelligence_Daniel_Goleman.pdf" download>Download PDF</a>
-    </div>
-  </div>
+      <p><strong>Tag:</strong> Psikologi, sains, Pengembangan Diri</p>
   
-  <div class="container"></div>
-<!-- The 48 Laws of Power -->
-<div class="book" data-category="Sosial & Politik Pengembangan Diri">
-    <img src="image/48_laws_of_power.jpg" alt="The 48 Laws of Power Cover">
+      <!-- Tombol -->
+      <div class="button-container">
+        <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+        <a class="download-btn" href="/path/to/Emotional_Intelligence_Daniel_Goleman.pdf" download>Download PDF</a>
+      </div>
+  
+      <!-- Deskripsi -->
+      <div class="description">
+        <p>
+          Dalam "Emotional Intelligence", Daniel Goleman memperkenalkan konsep revolusioner bahwa kesuksesan dalam hidup 
+          tidak hanya ditentukan oleh IQ, tetapi juga oleh EQ — kemampuan untuk memahami, mengelola, dan mengekspresikan 
+          emosi secara efektif. Buku ini menjelaskan lima komponen utama kecerdasan emosional, seperti kesadaran diri, 
+          pengendalian diri, empati, dan keterampilan sosial, serta dampaknya dalam kehidupan pribadi, profesional, dan pendidikan.
+        </p>
+      </div>
+    </div>
+  </div>  
+  
+  <div class="book" data-category="Sosial & Politik, Pengembangan Diri">
+    <img src="image/the_48_laws_of_power.jpg" alt="The 48 Laws of Power Cover">
     <div class="book-content">
       <h2>The 48 Laws of Power</h2>
       <p><strong>Penulis:</strong> Robert Greene</p>
-      <p>Buku ini membongkar strategi kekuasaan dari sejarah dan tokoh-tokoh besar, memberikan panduan praktis bagi siapa pun yang ingin memahami dinamika sosial dan pengaruh.</p>
-      <a class="download-btn" href="/path/to/The_48_Laws_of_Power_Robert_Greene.pdf" download>Download PDF</a>
+      <p><strong>Tag:</strong> Kekuasaan, Psikologi, Sosial & politik</p>
+  
+      <!-- Tombol -->
+      <div class="button-container">
+        <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+        <a class="download-btn" href="/path/to/The_48_Laws_of_Power_Robert_Greene.pdf" download>Download PDF</a>
+      </div>
+  
+      <!-- Deskripsi -->
+      <div class="description">
+        <p>
+          "The 48 Laws of Power" adalah panduan strategis yang membahas bagaimana kekuasaan bekerja di dunia sosial dan politik.
+          Robert Greene menyusun 48 hukum kekuasaan berdasarkan sejarah, studi kasus tokoh besar, dan kebijaksanaan klasik. 
+          Buku ini sering dianggap kontroversial, namun juga sangat populer di kalangan pemimpin, pebisnis, dan siapa saja 
+          yang tertarik pada dinamika pengaruh dan strategi sosial.
+        </p>
+      </div>
     </div>
   </div>
-
-  <div class="container"></div>
-<!-- Guns, Germs, and Steel -->
-<div class="book" data-category="Sejarah Sains">
-    <img src="image/guns_germs_steel.jpg" alt="Guns, Germs, and Steel Cover">
+  
+  <div class="book" data-category="Sejarah, Sains">
+    <img src="image/guns_germs_and_steel.jpg" alt="Guns, Germs, and Steel Cover">
     <div class="book-content">
       <h2>Guns, Germs, and Steel</h2>
       <p><strong>Penulis:</strong> Jared Diamond</p>
-      <p>Buku ini menjelaskan faktor-faktor lingkungan dan geografis yang membentuk perkembangan peradaban manusia, serta mengapa kekuasaan dan teknologi tidak tersebar merata di dunia.</p>
-      <a class="download-btn" href="/path/to/Guns_Germs_and_Steel_Jared_Diamond.pdf" download>Download PDF</a>
+      <p><strong>Tag:</strong> Sejarah, Sains, Peradaban</p>
+  
+      <!-- Tombol -->
+      <div class="button-container">
+        <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+        <a class="download-btn" href="/path/to/Guns_Germs_and_Steel_Jared_Diamond.pdf" download>Download PDF</a>
+      </div>
+  
+      <!-- Deskripsi -->
+      <div class="description">
+        <p>
+          "Guns, Germs, and Steel" adalah sebuah buku yang mencoba menjelaskan asal-usul ketidaksetaraan antar peradaban di dunia.
+          Jared Diamond mengajukan argumen bahwa faktor-faktor seperti geografi, lingkungan, dan teknologi lebih menentukan kemajuan 
+          suatu peradaban dibandingkan dengan faktor rasial atau kebudayaan. Buku ini memberikan wawasan tentang perkembangan manusia 
+          dan bagaimana kekuatan senjata, penyakit, dan struktur sosial membentuk dunia kita saat ini.
+        </p>
+      </div>
     </div>
   </div>
   
-  <div class="container"></div>
-<!-- Berani Tidak Disukai -->
-<div class="book" data-category="Psikologi Pengembangan Diri">
-    <img src="image/berani_tidak_disukai.jpg" alt="Berani Tidak Disukai Cover">
-    <div class="book-content">
-      <h2>Berani Tidak Disukai</h2>
-      <p><strong>Penulis:</strong> Ichiro Kishimi & Fumitake Koga</p>
-      <p>Buku ini mengangkat filsafat Adlerian untuk menunjukkan bahwa kebebasan sejati datang dari keberanian menjalani hidup sesuai prinsip diri, meski tak disukai orang lain.</p>
-      <a class="download-btn" href="/path/to/Berani_Tidak_Disukai_Kishimi_Koga.pdf" download>Download PDF</a>
+  <div class="container">
+    <!-- Berani Tidak Disukai -->
+    <div class="book" data-category="Psikologi, Pengembangan Diri">
+        <img src="image/berani_tidak_disukai.jpg" alt="Berani Tidak Disukai Cover">
+        <div class="book-content">
+            <h2>Berani Tidak Disukai</h2>
+            <p><strong>Penulis:</strong> Ichiro Kishimi, Fumitake Koga</p>
+            <p><strong>Tag:</strong> Psikologi, Pengembangan Diri</p>
+            <div class="button-container">
+                <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+                <div>
+                    <a class="download-btn" href="/path/to/berani_tidak_disukai.pdf" download>Download PDF</a>
+                </div>
+            </div>
+            <div class="description">
+                Buku **"Berani Tidak Disukai"** adalah sebuah karya yang menjelaskan tentang filosofi psikologi Adlerian. Buku ini mengajarkan bahwa kebahagiaan sejati bukan berasal dari pengakuan orang lain, tetapi dari kemampuan untuk hidup tanpa dipengaruhi oleh penilaian orang lain. Dengan pendekatan yang berbeda dari psikologi konvensional, buku ini menyarankan agar kita membebaskan diri dari kecemasan dan hidup lebih mandiri, tanpa tergantung pada pengakuan atau penerimaan sosial. Konsep utama yang diangkat adalah tentang memberi diri kita kebebasan untuk menjadi diri sendiri dan menjalani hidup dengan tujuan yang lebih jelas.
+            </div>
+        </div>
     </div>
-  </div>
+</div>
 
-  <div class="container"></div>
-<!-- Bicara Itu Ada Seninya -->
-<div class="book" data-category="Pengembangan Diri Sosial & Politik">
+<div class="book" data-category="Pengembangan Diri">
     <img src="image/bicara_itu_ada_seninya.jpg" alt="Bicara Itu Ada Seninya Cover">
     <div class="book-content">
       <h2>Bicara Itu Ada Seninya</h2>
-      <p><strong>Penulis:</strong> Harry W. Katz</p>
-      <p>Buku ini mengajarkan seni berbicara yang efektif, membahas cara-cara berbicara yang bisa mempengaruhi dan membuat audiens merasa dihargai.</p>
-      <a class="download-btn" href="/path/to/Bicara_Itu_Ada_Seninya_Harry_Katz.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Penulis:</strong> Oh Su Hyang</p>
+      <p><strong>Tag:</strong> Pengembangan Diri, Psikologi</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Bicara_Itu_Ada_Seninya.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            Buku ini membahas pentingnya keterampilan berbicara dalam kehidupan sehari-hari. Dengan mengajarkan seni berbicara yang efektif, buku ini memberikan wawasan tentang cara memilih kata yang tepat, intonasi yang sesuai, serta bagaimana bahasa tubuh dan kepercayaan diri memainkan peran penting dalam komunikasi. Buku ini cocok bagi siapa saja yang ingin meningkatkan keterampilan komunikasi mereka, baik dalam hubungan personal maupun profesional.
+          </div>  
+      </div>  
+    </div>  
   </div>
   
-  <div class="container"></div>
-<!-- The Law of Attraction -->
-<div class="book" data-category="Pengembangan Diri Psikologi">
-    <img src="image/the_law_of_attraction.jpg" alt="The Law of Attraction Cover">
+  
+  <div class="book" data-category="Pengembangan Diri">
+    <img src="image/TheLawOfAttraction.jpg" alt="The Law of Attraction Cover">
     <div class="book-content">
       <h2>The Law of Attraction</h2>
       <p><strong>Penulis:</strong> William Walker Atkinson</p>
-      <p>Buku ini membahas kekuatan pikiran dalam mempengaruhi kehidupan kita, dengan menekankan konsep bahwa kita menarik hal-hal yang sejalan dengan pikiran dan perasaan kita.</p>
-      <a class="download-btn" href="/path/to/The_Law_of_Attraction_William_Walker_Atkinson.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Pengembangan Diri, Psikologi</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/The_Law_of_Attraction.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            Buku ini membahas prinsip dasar dari Hukum Tarik-Menarik yang menyatakan bahwa apa yang kita pikirkan dan fokuskan akan menarik energi serupa ke dalam hidup kita. Melalui wawasan praktis dan contoh kehidupan nyata, buku ini membantu pembaca memahami cara menggunakan pikiran dan perasaan positif untuk mencapai tujuan mereka, menarik kebahagiaan, keberlimpahan, dan kesejahteraan.
+          </div>  
+      </div>  
+    </div>  
   </div>
   
-  <div class="container"></div>
-<!-- Relativity -->
-<div class="book" data-category="Sains Fisika">
-    <img src="image/relativity.jpg" alt="Relativity Cover">
+  
+  <div class="book" data-category="Sains, Filsafat">
+    <img src="image/relativity_theory.jpg" alt="Relativity: Teori Khusus dan Umum Cover">
     <div class="book-content">
-      <h2>Relativity: Teori Khusus and Umum</h2>
+      <h2>Relativity: Teori Khusus dan Umum</h2>
       <p><strong>Penulis:</strong> Albert Einstein</p>
-      <p>Buku ini menjelaskan teori relativitas khusus dan umum dengan cara yang mudah dipahami oleh pembaca umum, meskipun topiknya sangat kompleks dan mendalam.</p>
-      <a class="download-btn" href="/path/to/Relativity_Albert_Einstein.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Sains, Filsafat</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Relativity_Theory.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            Buku ini merupakan penjelasan mendalam dari teori relativitas yang revolusioner, yang dibagi menjadi dua bagian utama: teori relativitas khusus dan teori relativitas umum. Ditulis oleh Albert Einstein sendiri, buku ini menjelaskan konsep-konsep yang mendasar seperti ruang-waktu, relativitas kecepatan, serta efek gravitasi pada ruang-waktu. Einstein memaparkan ide-ide fisika teoritisnya dengan cara yang dapat dipahami oleh para ilmuwan dan pembaca awam sekaligus. Buku ini telah mengubah cara kita memahami alam semesta dan membuka jalan bagi penemuan ilmiah lebih lanjut.
+          </div>  
+      </div>  
+    </div>  
   </div>
   
-  <div class="container"></div>
-<!-- The Mountain Is You -->
-<div class="book" data-category="Pengembangan Diri Psikologi">
+  <div class="book" data-category="Pengembangan Diri">
     <img src="image/the_mountain_is_you.jpg" alt="The Mountain Is You Cover">
     <div class="book-content">
       <h2>The Mountain Is You</h2>
       <p><strong>Penulis:</strong> Brianna Wiest</p>
-      <p>Buku ini membahas tentang bagaimana kita bisa mengatasi hambatan internal dan menemukan potensi sejati dengan menghadapi "gunung" yang ada di dalam diri kita sendiri.</p>
-      <a class="download-btn" href="/path/to/The_Mountain_Is_You_Brianna_Wiest.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Pengembangan Diri</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/The_Mountain_Is_You.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            "The Mountain Is You" adalah buku yang mengajak pembaca untuk menghadapi diri sendiri dan mengatasi hambatan internal yang menghalangi pencapaian dan kebahagiaan mereka. Brianna Wiest mengajarkan tentang pentingnya transformasi diri dan bagaimana kita sering kali menjadi penghalang terbesar bagi diri kita sendiri. Melalui buku ini, pembaca diajak untuk melepaskan pola pikir dan kebiasaan yang merugikan serta mulai membangun kehidupan yang lebih baik dengan memanfaatkan potensi diri yang sesungguhnya.
+          </div>  
+      </div>  
+    </div>  
   </div>
   
-  <div class="container"></div>
-<!-- The Psychology of Money -->
-<div class="book" data-category="Ekonomi Psikologi">
-    <img src="image/psychology_of_money.jpg" alt="The Psychology of Money Cover">
+  <div class="book" data-category="Ekonomi, Pengembangan Diri">
+    <img src="image/the_psychology_of_money.jpg" alt="The Psychology of Money Cover">
     <div class="book-content">
       <h2>The Psychology of Money</h2>
       <p><strong>Penulis:</strong> Morgan Housel</p>
-      <p>Buku ini membahas hubungan antara uang dan perilaku manusia, serta bagaimana cara kita membuat keputusan finansial yang lebih baik dengan memahami psikologi di balik uang.</p>
-      <a class="download-btn" href="/path/to/The_Psychology_of_Money_Morgan_Housel.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Ekonomi, Pengembangan Diri</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/The_Psychology_of_Money.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            "The Psychology of Money" mengeksplorasi bagaimana pikiran dan perasaan kita terhadap uang membentuk keputusan keuangan kita, serta bagaimana pola pikir dan perilaku keuangan kita seringkali lebih penting daripada pengetahuan teknis dalam mengelola uang. Morgan Housel mengungkapkan bahwa memahami psikologi dibalik keputusan keuangan adalah kunci untuk mengelola uang dengan lebih bijaksana, dan buku ini memberi wawasan yang mendalam tentang bagaimana kita bisa menjadi lebih sadar dan bijak dalam hal uang, investasi, dan keuangan pribadi.
+          </div>  
+      </div>  
+    </div>  
   </div>
-  
-  <div class="container"></div>
-  <!-- Homo Deus -->
-  <div class="book" data-category="Sejarah Sains">
+   
+  <div class="book" data-category="Sejarah, Sains, Filsafat">
     <img src="image/homo_deus.jpg" alt="Homo Deus Cover">
     <div class="book-content">
       <h2>Homo Deus: A Brief History of Tomorrow</h2>
       <p><strong>Penulis:</strong> Yuval Noah Harari</p>
-      <p>Buku ini mengeksplorasi masa depan umat manusia, membahas bagaimana teknologi dan bioteknologi dapat mengubah kita menjadi manusia yang lebih unggul, dan apa konsekuensinya bagi peradaban.</p>
-      <a class="download-btn" href="/path/to/Homo_Deus_Yuval_Noah_Harari.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Sejarah, Sains, Filsafat</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Homo_Deus.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            "Homo Deus" mengisahkan pandangan masa depan umat manusia di mana teknologi dan kecerdasan buatan (AI) akan mengubah esensi kehidupan manusia. Harari menyelidiki kemungkinan peran manusia sebagai 'dewa' di masa depan dengan kemampuan untuk mengendalikan kehidupan, kematian, dan evolusi melalui teknologi. Buku ini menggali topik seperti transhumanisme, etika teknologi, dan potensi bahaya yang muncul dari pengembangan teknologi yang semakin canggih. Harari juga mempertanyakan apakah pencapaian manusia ini akan membawa kebahagiaan atau justru menciptakan tantangan baru yang lebih besar.
+          </div>  
+      </div>  
+    </div>  
   </div>
-
-  <div class="container"></div>
-<!-- How to Win Friends and Influence People -->
-<div class="book" data-category="Pengembangan Diri Sosial & Politik">
-    <img src="image/how_to_win_friends.jpg" alt="How to Win Friends and Influence People Cover">
+  
+  <div class="book" data-category="Pengembangan Diri, Psikologi, Sosial & Politik">
+    <img src="image/how_to_win_friends_and_influence_people.jpg" alt="How to Win Friends and Influence People Cover">
     <div class="book-content">
       <h2>How to Win Friends and Influence People</h2>
       <p><strong>Penulis:</strong> Dale Carnegie</p>
-      <p>Buku klasik ini menawarkan prinsip-prinsip dasar untuk meningkatkan keterampilan sosial dan membangun hubungan yang lebih baik dengan orang lain, baik dalam kehidupan pribadi maupun profesional.</p>
-      <a class="download-btn" href="/path/to/How_to_Win_Friends_and_Influence_People_Dale_Carnegie.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Pengembangan Diri, Psikologi, Sosial & Politik</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/How_to_Win_Friends.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            "How to Win Friends and Influence People" adalah buku klasik yang mengajarkan keterampilan komunikasi dan interaksi sosial. Dale Carnegie memberikan tips dan teknik praktis tentang bagaimana membangun hubungan yang kuat, mempengaruhi orang lain, dan mengatasi konflik secara positif. Buku ini mencakup prinsip-prinsip penting seperti cara mendengarkan orang lain dengan empati, memberikan pujian yang tulus, serta membangun rasa saling percaya. Buku ini sangat berguna bagi siapa saja yang ingin meningkatkan keterampilan interpersonal mereka dalam berbagai aspek kehidupan, baik dalam hubungan pribadi maupun profesional.
+          </div>  
+      </div>  
+    </div>  
   </div>
-
-  <div class="container"></div>
-  <!-- Blink -->
-<div class="book" data-category="Psikologi Sains">
-    <img src="image/blink.jpg" alt="Blink Cover">
+  
+  <div class="book" data-category="Psikologi, Pengembangan Diri, Sains">
+    <img src="image/blink_the_power_of_thinking_without_thinking.jpg" alt="Blink: The Power of Thinking Without Thinking Cover">
     <div class="book-content">
       <h2>Blink: The Power of Thinking Without Thinking</h2>
       <p><strong>Penulis:</strong> Malcolm Gladwell</p>
-      <p>Buku ini mengeksplorasi bagaimana keputusan cepat dan instingtif yang kita buat seringkali lebih akurat daripada keputusan yang dipikirkan secara rasional, serta bagaimana intuisi bekerja dalam otak manusia.</p>
-      <a class="download-btn" href="/path/to/Blink_Malcolm_Gladwell.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Psikologi, Pengembangan Diri, Sains</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Blink_Malcolm_Gladwell.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            "Blink" adalah buku yang menggali konsep pengambilan keputusan cepat yang dilakukan tanpa banyak berpikir, yang sering disebut sebagai "thinking without thinking." Malcolm Gladwell mengeksplorasi bagaimana intuisi kita dapat menghasilkan keputusan yang lebih baik dan lebih cepat daripada proses berpikir yang lebih lambat dan rasional. Dengan menggunakan berbagai contoh dari kehidupan sehari-hari, Gladwell menunjukkan bahwa otak kita mampu memproses informasi dengan cara yang sangat efisien. Buku ini memperkenalkan ide bahwa, dalam banyak situasi, intuisi dapat menjadi alat yang lebih efektif daripada analisis yang mendalam.
+          </div>  
+      </div>  
+    </div>  
   </div>
-
+  
   <div class="container"></div>
 <!-- Social Intelligence -->
-<div class="book" data-category="Psikologi Sosial & Politik">
+<div class="book" data-category="Psikologi Sosial & Politik sains">
     <img src="image/social_intelligence.jpg" alt="Social Intelligence Cover">
     <div class="book-content">
       <h2>Social Intelligence: The New Science of Human Relationships</h2>
       <p><strong>Penulis:</strong> Daniel Goleman</p>
+      <p><strong>Tag:</strong> Psikologi, Pengembangan Diri, Sains, sosial & politik</p>
       <p>Buku ini mengupas bagaimana kemampuan untuk memahami dan mengelola hubungan sosial memainkan peran penting dalam kesuksesan hidup dan kesehatan emosional, berdasarkan temuan terbaru dalam ilmu saraf dan psikologi.</p>
       <a class="download-btn" href="/path/to/Social_Intelligence_Daniel_Goleman.pdf" download>Download PDF</a>
     </div>
   </div>  
 
-  <div class="container"></div>
-<!-- Stolen Focus -->
-<div class="book" data-category="Psikologi Sains">
+  <div class="book" data-category="Psikologi, Pengembangan Diri, Sosial">
     <img src="image/stolen_focus.jpg" alt="Stolen Focus Cover">
     <div class="book-content">
-      <h2>Stolen Focus: Why You Can’t Pay Attention—and How to Think Deeply Again</h2>
+      <h2>Stolen Focus: Why You Can't Pay Attention—and How to Think Deeply Again</h2>
       <p><strong>Penulis:</strong> Johann Hari</p>
-      <p>Buku ini membahas bagaimana kemampuan kita untuk fokus dan berpikir mendalam dirampas oleh berbagai faktor modern, termasuk teknologi, gaya hidup, dan sistem sosial, serta bagaimana cara merebutnya kembali.</p>
-      <a class="download-btn" href="/path/to/Stolen_Focus_Johann_Hari.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Psikologi, Pengembangan Diri, Sosial</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Stolen_Focus_Johann_Hari.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            "Stolen Focus" membahas tentang krisis perhatian yang dialami oleh banyak orang saat ini, yang disebabkan oleh berbagai faktor seperti teknologi, media sosial, dan kebiasaan hidup modern yang cepat. Johann Hari mengeksplorasi bagaimana gangguan ini memengaruhi kehidupan pribadi dan profesional kita serta mengurangi kemampuan kita untuk berpikir secara mendalam. Buku ini juga menawarkan solusi dan strategi untuk mendapatkan kembali fokus dan meningkatkan kualitas hidup dengan mengurangi distraksi dan memperlambat tempo hidup. Hari membawa pembaca pada perjalanan untuk memahami mengapa kita kehilangan fokus dan bagaimana cara untuk memulihkannya.
+          </div>  
+      </div>  
+    </div>  
   </div>
   
-  <div class="container"></div>
-<!-- The Secret -->
-<div class="book" data-category="Spiritual Pengembangan Diri">
+  
+  <div class="book" data-category="Pengembangan Diri, Motivasi, Spiritual">
     <img src="image/the_secret.jpg" alt="The Secret Cover">
     <div class="book-content">
       <h2>The Secret</h2>
       <p><strong>Penulis:</strong> Rhonda Byrne</p>
-      <p>Buku ini mempopulerkan hukum tarik-menarik (law of attraction), menyatakan bahwa pikiran positif dapat menarik hal-hal positif dalam hidup, dan menawarkan panduan praktis untuk mewujudkan keinginan melalui kekuatan pikiran.</p>
-      <a class="download-btn" href="/path/to/The_Secret_Rhonda_Byrne.pdf" download>Download PDF</a>
-    </div>
-  </div>  
-
-  <div class="container"></div>
-  <!-- Ikigai -->
-<div class="book" data-category="Spiritual Pengembangan Diri">
+      <p><strong>Tag:</strong> Pengembangan Diri, Spiritual</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/The_Secret_Rhonda_Byrne.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            "The Secret" adalah buku yang mengeksplorasi konsep hukum tarik-menarik (Law of Attraction), yang menyatakan bahwa pikiran positif dapat menarik kekayaan, kebahagiaan, dan kesuksesan dalam hidup. Rhonda Byrne menyarankan bahwa kita bisa menciptakan kenyataan kita sendiri melalui kekuatan pikiran dan keyakinan positif. Buku ini mengungkapkan berbagai prinsip dan teknik yang membantu pembaca untuk berpikir positif dan mewujudkan impian mereka. Dikenal sebagai buku motivasi dan spiritual yang sangat populer, "The Secret" telah menginspirasi jutaan orang di seluruh dunia untuk melihat hidup dengan cara yang berbeda.
+          </div>  
+      </div>  
+    </div>  
+  </div>
+  
+  <div class="book" data-category="Pengembangan Diri, Kesehatan, Filosofi">
     <img src="image/ikigai.jpg" alt="Ikigai Cover">
     <div class="book-content">
       <h2>Ikigai: The Japanese Secret to a Long and Happy Life</h2>
       <p><strong>Penulis:</strong> Héctor García & Francesc Miralles</p>
-      <p>Buku ini mengungkap filosofi hidup masyarakat Jepang dalam menemukan “ikigai” atau alasan untuk bangun di pagi hari, yang dianggap sebagai kunci hidup panjang, sehat, dan bahagia.</p>
-      <a class="download-btn" href="/path/to/Ikigai_Hector_Garcia_Francesc_Miralles.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Pengembangan Diri, Filsafat</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Ikigai_The_Japanese_Secret.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            "Ikigai" adalah konsep Jepang yang merujuk pada alasan seseorang untuk bangun setiap pagi, yaitu menemukan tujuan hidup yang memberikan kebahagiaan dan makna. Buku ini mengungkapkan rahasia kehidupan panjang dan bahagia yang ditemukan di Okinawa, Jepang, tempat dengan harapan hidup tertinggi di dunia. Melalui wawancara dengan penduduk Okinawa, García dan Miralles memperkenalkan ide tentang "ikigai", yang berfokus pada kehidupan yang lebih bermakna, penuh gairah, dan kesehatan yang baik. Buku ini memberikan wawasan tentang cara mengintegrasikan ikigai ke dalam kehidupan sehari-hari untuk meraih kebahagiaan dan kesejahteraan.
+          </div>  
+      </div>  
+    </div>  
   </div>
   
-  <div class="container"></div>
-<!-- Pale Blue Dot -->
-<div class="book" data-category="Sains Filsafat">
+  <div class="book" data-category="Sains, Astronomi, Filosofi">
     <img src="image/pale_blue_dot.jpg" alt="Pale Blue Dot Cover">
     <div class="book-content">
       <h2>Pale Blue Dot: A Vision of the Human Future in Space</h2>
       <p><strong>Penulis:</strong> Carl Sagan</p>
-      <p>Buku ini menawarkan refleksi mendalam tentang tempat manusia di alam semesta, menjelajahi eksplorasi luar angkasa sekaligus memberikan pandangan filosofis mengenai kerendahan hati dan tanggung jawab kita terhadap planet ini.</p>
-      <a class="download-btn" href="/path/to/Pale_Blue_Dot_Carl_Sagan.pdf" download>Download PDF</a>
-    </div>
-  </div>  
-
-  <div class="container"></div>
-<!-- The Warren Buffett Way -->
-<div class="book" data-category="Ekonomi Pengembangan Diri">
+      <p><strong>Tag:</strong> Sains, Astronomi, Filosofi</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Pale_Blue_Dot_Carl_Sagan.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            "Pale Blue Dot" adalah buku yang ditulis oleh Carl Sagan yang membahas tempat manusia dalam alam semesta dan masa depan kita di luar Bumi. Terinspirasi oleh gambar yang diambil oleh Voyager 1 pada tahun 1990, yang menunjukkan Bumi sebagai titik kecil di luar angkasa, Sagan merenungkan betapa kecilnya planet kita di antara kekosongan alam semesta yang luas. Buku ini menyajikan pandangan yang mendalam tentang pentingnya eksplorasi ruang angkasa, serta tanggung jawab kita sebagai spesies yang mampu mempengaruhi masa depan planet ini. Sagan menekankan pentingnya kerendahan hati, kesadaran ekologis, dan kerja sama global untuk menjaga Bumi dan masa depan umat manusia.
+          </div>  
+      </div>  
+    </div>  
+  </div>
+  
+  <div class="book" data-category="Ekonomi & Bisnis">
     <img src="image/warren_buffett_way.jpg" alt="The Warren Buffett Way Cover">
     <div class="book-content">
       <h2>The Warren Buffett Way</h2>
       <p><strong>Penulis:</strong> Robert G. Hagstrom</p>
-      <p>Buku ini mengulas prinsip-prinsip investasi yang digunakan Warren Buffett dalam membangun kekayaannya, menawarkan wawasan strategis dan filosofi investasi jangka panjang yang telah terbukti berhasil.</p>
-      <a class="download-btn" href="/path/to/The_Warren_Buffett_Way_Robert_Hagstrom.pdf" download>Download PDF</a>
-    </div>
-  </div>  
-
-  <div class="container"></div>
-<!-- Beresin Dulu Hidupmu -->
-<div class="book" data-category="Pengembangan Diri Psikologi">
+      <p><strong>Tag:</strong> Ekonomi & Bisnisi</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/The_Warren_Buffett_Way_Robert_G_Hagstrom.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            *The Warren Buffett Way* adalah buku yang mengungkapkan prinsip-prinsip investasi yang diterapkan oleh Warren Buffett, salah satu investor paling sukses di dunia. Penulis Robert G. Hagstrom menggali filosofi Buffett dalam mengambil keputusan investasi yang berfokus pada analisis fundamental, nilai intrinsik perusahaan, dan pentingnya kesabaran serta disiplin. Buku ini memberikan wawasan tentang bagaimana Buffett memilih saham, menganalisis perusahaan, serta cara berpikirnya dalam mengelola portofolio investasi yang menguntungkan. *The Warren Buffett Way* adalah panduan yang sangat berharga bagi para investor yang ingin belajar dari salah satu investor legendaris di dunia.
+          </div>  
+      </div>  
+    </div>  
+  </div>
+  
+  <div class="book" data-category="Pengembangan Diri">
     <img src="image/beresin_dulu_hidupmu.jpg" alt="Beresin Dulu Hidupmu Cover">
     <div class="book-content">
       <h2>Beresin Dulu Hidupmu</h2>
       <p><strong>Penulis:</strong> Fellexandro Ruby</p>
-      <p>Buku ini membahas cara membereskan berbagai aspek kehidupan mulai dari mindset, tujuan hidup, hingga tindakan sehari-hari, agar hidup lebih terarah, produktif, dan bermakna.</p>
-      <a class="download-btn" href="/path/to/Beresin_Dulu_Hidupmu_Fellexandro_Ruby.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Pengembangan Diri</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Beresin_Dulu_Hidupmu_Fellexandro_Ruby.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            *Beresin Dulu Hidupmu* adalah buku yang mengajak pembaca untuk mereset dan membersihkan hidup dari beban mental yang menghalangi kemajuan. Fellexandro Ruby, seorang pengusaha dan motivator, menyajikan berbagai cara praktis untuk mengelola pikiran dan emosi, serta menyusun hidup yang lebih terstruktur dan produktif. Buku ini mengajarkan tentang pentingnya kesadaran diri, mengelola stres, dan menetapkan tujuan yang jelas untuk mencapai kehidupan yang lebih berarti dan bahagia. Dengan gaya yang santai namun penuh insight, buku ini menjadi panduan yang berguna bagi siapa saja yang ingin meraih kesuksesan dalam kehidupan pribadi maupun profesional.
+          </div>  
+      </div>  
+    </div>  
   </div>  
 
-  <div class="container"></div>
-<!-- Max Havelaar -->
-<div class="book" data-category="Sejarah Sosial & Politik">
+  <div class="book" data-category="Sejarah novel">
     <img src="image/max_havelaar.jpg" alt="Max Havelaar Cover">
     <div class="book-content">
       <h2>Max Havelaar</h2>
       <p><strong>Penulis:</strong> Multatuli (Eduard Douwes Dekker)</p>
-      <p>Sebuah karya sastra klasik yang mengecam praktik kolonialisme Belanda di Hindia Belanda, sekaligus menjadi simbol perjuangan keadilan sosial dan kritik tajam terhadap ketidakadilan birokrasi kolonial.</p>
-      <a class="download-btn" href="/path/to/Max_Havelaar_Multatuli.pdf" download>Download PDF</a>
-    </div>
-  </div>  
+      <p><strong>Tag:</strong> Sejarah novel</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Max_Havelaar_Multatuli.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            *Max Havelaar* adalah karya sastra terkenal dari Multatuli (nama pena Eduard Douwes Dekker), yang pertama kali diterbitkan pada tahun 1860. Buku ini menjadi simbol perlawanan terhadap penindasan kolonial Belanda di Indonesia. Cerita ini mengikuti kisah Max Havelaar, seorang pejabat Belanda yang berjuang untuk mengungkapkan ketidakadilan terhadap petani pribumi di Jawa, yang dihadapkan pada eksploitasi oleh pemerintah kolonial dan penguasa lokal. Max Havelaar dianggap sebagai salah satu karya penting dalam sastra Belanda dan memberikan pengaruh besar pada perubahan sosial di masa penjajahan.
+          </div>  
+      </div>  
+    </div>  
+  </div>
 
-  <div class="container"></div>
-<!-- Thinking, Fast and Slow -->
-<div class="book" data-category="Psikologi Sains">
-    <img src="image/thinking_fast_and_slow.jpg" alt="Thinking Fast and Slow Cover">
+  <div class="book" data-category="Psikologi, Sains">
+    <img src="image/thinking_fast_and_slow.jpg" alt="Thinking, Fast and Slow Cover">
     <div class="book-content">
       <h2>Thinking, Fast and Slow</h2>
       <p><strong>Penulis:</strong> Daniel Kahneman</p>
-      <p>Buku ini mengungkap dua sistem dalam cara berpikir manusia: yang cepat dan intuitif vs. yang lambat dan logis. Kahneman menjelaskan bagaimana bias kognitif dan intuisi memengaruhi pengambilan keputusan kita sehari-hari.</p>
-      <a class="download-btn" href="/path/to/Thinking_Fast_and_Slow_Daniel_Kahneman.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Psikologi, Sains</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Thinking_Fast_and_Slow_Daniel_Kahneman.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            *Thinking, Fast and Slow* adalah buku yang ditulis oleh Daniel Kahneman, seorang psikolog pemenang Hadiah Nobel, yang menggali cara otak kita membuat keputusan. Buku ini membahas dua sistem berpikir yang ada di dalam otak manusia: Sistem 1, yang cepat dan intuitif, dan Sistem 2, yang lebih lambat dan analitis. Kahneman menjelaskan bagaimana kedua sistem ini bekerja bersama untuk mempengaruhi pengambilan keputusan kita, sering kali tanpa kita sadari. Buku ini memberikan wawasan yang dalam tentang bias kognitif, heuristik, dan proses mental yang mempengaruhi perilaku manusia. *Thinking, Fast and Slow* adalah karya penting dalam psikologi dan ekonomi perilaku.
+          </div>  
+      </div>  
+    </div>  
   </div>
   
-  <div class="container"></div>
-<!-- Esensialisme: Pentingkan yang Penting Saja -->
-<div class="book" data-category="Pengembangan Diri Psikologi">
-    <img src="image/esensialisme.jpg" alt="Esensialisme Cover">
+  <div class="book" data-category="Pengembangan Diri">
+    <img src="image/esensialisme_pentingkan_yang_penting_saja.jpg" alt="Esensialisme: Pentingkan yang Penting Saja Cover">
     <div class="book-content">
       <h2>Esensialisme: Pentingkan yang Penting Saja</h2>
       <p><strong>Penulis:</strong> Greg McKeown</p>
-      <p>Buku ini mengajarkan cara hidup lebih fokus dengan memprioritaskan yang benar-benar penting dan menghilangkan hal-hal yang tidak perlu, untuk mencapai hasil yang maksimal dengan usaha yang lebih sedikit.</p>
-      <a class="download-btn" href="/path/to/Esensialisme_Greg_McKeown.pdf" download>Download PDF</a>
-    </div>
-  </div>
+      <p><strong>Tag:</strong> Pengembangan Diri</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Esensialisme_Pentingkan_yang_Penting_Saja_Greg_McKeown.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            *Esensialisme: Pentingkan yang Penting Saja* adalah buku karya Greg McKeown yang mengajarkan prinsip-prinsip untuk menjalani hidup dengan fokus dan efisiensi. Buku ini mengajak pembaca untuk membuang hal-hal yang tidak penting dan hanya fokus pada apa yang benar-benar memberikan nilai tambah dalam kehidupan mereka. McKeown mengajak pembaca untuk mempertimbangkan kembali apa yang benar-benar penting, mengelola waktu dan energi dengan bijak, serta membuat keputusan yang lebih bijaksana untuk hidup yang lebih terfokus dan bermakna. Konsep esensialisme mengajarkan kita untuk menolak banyaknya gangguan dan hidup dengan tujuan yang jelas.
+          </div>  
+      </div>  
+    </div>  
+  </div>  
   
-  <div class="container"></div>
-<!-- The Metamorphosis -->
-<div class="book" data-category="Filsafat Sastra">
+  <div class="book" data-category="Filsafat, Psikologi">
     <img src="image/the_metamorphosis.jpg" alt="The Metamorphosis Cover">
     <div class="book-content">
       <h2>The Metamorphosis</h2>
       <p><strong>Penulis:</strong> Franz Kafka</p>
-      <p>Buku ini mengisahkan Gregor Samsa yang tiba-tiba berubah menjadi serangga raksasa, menggambarkan alienasi, krisis eksistensial, dan keterasingan manusia dalam dunia modern yang terasingkan.</p>
-      <a class="download-btn" href="/path/to/The_Metamorphosis_Franz_Kafka.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Filsafat, Psikologi</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/The_Metamorphosis_Franz_Kafka.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            *The Metamorphosis* adalah sebuah novel pendek karya Franz Kafka yang pertama kali diterbitkan pada tahun 1915. Cerita ini mengisahkan tentang Gregor Samsa, seorang pria muda yang terbangun suatu pagi dan mendapati dirinya berubah menjadi seekor serangga raksasa. Kafka mengeksplorasi tema alienasi, identitas, dan perjuangan internal seseorang dengan keluarga dan masyarakat. Novel ini menjadi simbol dari perasaan terisolasi dan keterasingan yang dirasakan oleh individu dalam kehidupan modern, serta menggambarkan kecemasan eksistensial yang mendalam.
+          </div>  
+      </div>  
+    </div>  
   </div>
-
-  <div class="container"></div>
-  <!-- Pelajaran untuk Abad ke-21 -->
-<div class="book" data-category="Sains Filsafat Sosial & Politik">
+  
+  <div class="book" data-category="Sejarah, Filsafat, Sains,">
     <img src="image/pelajaran_untuk_abad_ke_21.jpg" alt="Pelajaran untuk Abad ke-21 Cover">
     <div class="book-content">
       <h2>Pelajaran untuk Abad ke-21</h2>
       <p><strong>Penulis:</strong> Yuval Noah Harari</p>
-      <p>Buku ini mengupas tantangan global yang dihadapi umat manusia, seperti kemajuan teknologi, revolusi industri 4.0, masalah sosial-politik, dan bagaimana kita harus mempersiapkan diri untuk masa depan yang penuh ketidakpastian.</p>
-      <a class="download-btn" href="/path/to/Pelajaran_untuk_Abad_ke_21_Yuval_Noah_Harari.pdf" download>Download PDF</a>
-    </div>
+      <p><strong>Tag:</strong> Sejarah, Filsafat, Sains</p>
+      <div class="button-container">
+          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+          <div>
+            <a class="download-btn" href="/path/to/Pelajaran_Untuk_Abad_ke_21_Yuval_Noah_Harari.pdf" download>Download PDF</a>
+          </div>
+          <div class="description">
+            *Pelajaran untuk Abad ke-21* adalah buku karya Yuval Noah Harari yang membahas tantangan global yang dihadapi umat manusia di era modern. Buku ini mengulas perubahan besar yang dipicu oleh kemajuan teknologi, seperti kecerdasan buatan, bioteknologi, dan dampaknya terhadap pekerjaan, kekuasaan, dan kehidupan sosial. Harari juga mengeksplorasi pertanyaan tentang masa depan umat manusia, etika, dan filosofi, serta bagaimana kita dapat mempersiapkan diri untuk menghadapi dunia yang semakin kompleks dan terhubung. Buku ini mengajak pembaca untuk berpikir kritis tentang arah peradaban dan pentingnya pendidikan di abad ke-21.
+          </div>  
+      </div>  
+    </div>  
   </div>
   
   
@@ -587,6 +809,32 @@
           }
         });
       }
+        // Tutup semua deskripsi saat halaman dimuat
+        window.onload = () => {
+          document.querySelectorAll('.description').forEach(desc => {
+            desc.style.display = 'none';
+          });
+        };
+      
+        // Fungsi toggle tombol deskripsi
+        function toggleDeskripsi(button) {
+          const desc = button.closest('.book').querySelector('.description');
+          desc.style.display = desc.style.display === 'block' ? 'none' : 'block';
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const container = document.querySelector(".container");
+            const posts = Array.from(container.children);
+            
+            // Acak urutan
+            for (let i = posts.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [posts[i], posts[j]] = [posts[j], posts[i]];
+            }
+        
+            // Hapus semua anak, lalu tambahkan yang sudah diacak
+            container.innerHTML = '';
+            posts.forEach(post => container.appendChild(post));
+          });
   </script>
 </body>
 </html>
