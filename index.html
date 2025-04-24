@@ -34,17 +34,28 @@
     }
     .container {
       padding: 20px;
-    }
+      display: flex;
+      flex-direction: column; /* Agar setiap buku berada dalam kolom */
+      gap: 0px; /* Menghilangkan jarak antar elemen */
+    } 
+    .container > * {
+        margin: 3;
+        padding: 3;
+      }
+      
+      .book, .post {
+        margin-bottom: 10px; /* Atur sesuai kebutuhan, bisa 0px jika perlu */
+      }     
     .book {
       background-color: #1e1e1e;
       padding: 20px;
       border-radius: 10px;
-      margin-bottom: 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.3);
       display: flex;
       gap: 20px;
       align-items: flex-start;
       flex-direction: row;  /* Menjaga gambar di kiri dan konten di kanan */
+      margin-bottom: 0; /* Menghilangkan margin bawah pada setiap elemen */
     }
     .book-content {
       flex: 1;
@@ -66,15 +77,70 @@
     .download-btn {
       display: inline-block;
       padding: 10px 15px;
-      background-color: #3b82f6;
+      background-color: #000000;  /* Set background color to black */
       color: white;
       text-decoration: none;
       border-radius: 5px;
-      transition: background-color 0.3s ease;
+      border: 2px solid transparent;  /* Set border to transparent */
+      position: relative;  /* To position the neon glow */
+      overflow: hidden;
+      transition: color 0.4s, box-shadow 0.4s;
     }
+
+    .download-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #39FF14;  /* Neon green color */
+      z-index: -1;
+      transition: all 0.4s;
+      transform: scaleX(0) scaleY(0);
+      transform-origin: bottom right;
+      border-radius: 5px;
+    }
+
+    .download-btn:hover::before {
+      transform: scaleX(1) scaleY(1);  /* Show neon effect on hover */
+    }
+
     .download-btn:hover {
-      background-color: #2563eb;
+      color: #39FF14;  /* Change text color to neon green on hover */
+      box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14;  /* Neon glow effect */
     }
+
+    .category-container {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    #category-select {
+      padding: 10px 15px;
+      font-size: 14px;
+      background-color: #000; /* black background */
+      color: #39FF14; /* neon green text */
+      border: 2px solid #39FF14; /* neon border */
+      border-radius: 8px;
+      outline: none;
+      box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    #category-select:hover {
+      box-shadow: 0 0 8px #39FF14, 0 0 16px #39FF14;
+      color: #ffffff;
+      background-color: #111;
+    }
+
+    #category-select option {
+      background-color: #121212;
+      color: white;
+    }
+      
+      
   </style>
 </head>
 <body>
@@ -83,11 +149,29 @@
   </header>
 
   <div class="search-container">
-    <input type="text" id="search-input" placeholder="Cari buku..." onkeyup="searchBooks()">
+    <input type="text" id="search-input" placeholder="Cari buku atau penulis..." onkeyup="searchBooks()"> total : 2 buku
+  </div>
+
+  <div class="category-container">
+    <label for="category-select">Kategori:</label>
+    <select id="category-select" onchange="filterCategory()">
+      <option value="all">Semua</option>
+      <option value="sejarah">Sejarah</option>
+      <option value="filsafat">Filsafat</option>
+      <option value="sains">Sains</option>
+      <option value="psikologi">Psikologi</option>
+      <option value="spiritual">Spiritualitas</option>
+      <option value="sosial">Sosial & Politik</option>
+      <option value="ekonomi">Ekonomi</option>
+      <option value="bahasa">Bahasa</option>
+      <option value="pengembangan-diri">Pengembangan Diri</option>
+      <option value="novel">Novel</option>
+      <!-- Tambahkan kategori lain sesuai kebutuhan -->
+    </select>
   </div>
 
   <div class="container">
-    <div class="book">
+    <div class="book"data-category="Sejarah Sains filsafat"> 
       <img src="image/sapiens.jpg" alt="Sapiens Cover">
       <div class="book-content">
         <h2>Sapiens: A Brief History of Humankind</h2>
@@ -98,8 +182,21 @@
     </div>
   </div>
 
-  <div class="book">
-    <img src="image/Teras.jpg" alt="Teras Cover">
+  <div class="container">
+    <!-- The Righteous Mind -->
+<div class="book" data-category="Psikologi Sosial & Politik">
+    <img src="image/the_righteous_mind.jpg" alt="The Righteous Mind Cover">
+    <div class="book-content">
+      <h2>The Righteous Mind</h2>
+      <p><strong>Penulis:</strong> Jonathan Haidt</p>
+      <p>Buku ini membahas bagaimana dan mengapa orang-orang memiliki pandangan moral yang berbeda, serta bagaimana pembagian ini memengaruhi politik dan agama di seluruh dunia.</p>
+      <a class="download-btn" href="/path/to/The_Righteous_Mind_Jonathan_Haidt.pdf" download>Download PDF</a>
+    </div>
+  </div>  
+
+  <div class="container">
+    <div class="book" data-category="Filsafat Pengembangan-Diri"> 
+    <img src="image/teras.jpg" alt="Teras Cover">
     <div class="book-content">
       <h2>Filosofi Teras : Filsafat Yunani-Romawi Kuno Untuk Mental Tangguh Masa Kini</h2>
       <p><strong>Penulis:</strong> Hendri Manampiring</p>
@@ -107,6 +204,333 @@
       <a class="download-btn" href="/path/to/Sapiens_Yuval_Noah_Harari.pdf" download>Download PDF</a>
     </div>
   </div>
+</div>
+
+<div class="container">
+<div class="book" data-category="Ekonomi Pengembangan Diri">
+    <img src="image/think_and_grow_rich.jpg" alt="Think and Grow Rich Cover">
+    <div class="book-content">
+      <h2>Think and Grow Rich</h2>
+      <p><strong>Penulis:</strong> Napoleon Hill</p>
+      <p>Salah satu buku klasik pengembangan diri dan finansial paling berpengaruh sepanjang masa.</p>
+      <a class="download-btn" href="/path/to/Think_And_Grow_Rich_Napoleon_Hill.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  <div>
+
+    <div class="container"></div>
+    <div class="book" data-category="Pengembangan Diri Psikologi">
+        <img src="image/atomic_habits.jpg" alt="Atomic Habits Cover">
+        <div class="book-content">
+          <h2>Atomic Habits</h2>
+          <p><strong>Penulis:</strong> James Clear</p>
+          <p>Buku ini menawarkan strategi praktis untuk membentuk kebiasaan baik, menghentikan kebiasaan buruk, dan menguasai perilaku sehari-hari demi hasil luar biasa.</p>
+          <a class="download-btn" href="/path/to/Atomic_Habits_James_Clear.pdf" download>Download PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container"></div>
+<div class="book" data-category="Ekonomi Pengembangan Diri">
+    <img src="image/rich_dad_poor_dad.jpg" alt="Rich Dad Poor Dad Cover">
+    <div class="book-content">
+      <h2>Rich Dad Poor Dad</h2>
+      <p><strong>Penulis:</strong> Robert T. Kiyosaki</p>
+      <p>Buku ini membandingkan pola pikir orang kaya dan miskin, serta menekankan pentingnya literasi keuangan dalam mencapai kebebasan finansial.</p>
+      <a class="download-btn" href="/path/to/Rich_Dad_Poor_Dad_Robert_Kiyosaki.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+<!-- Emotional Intelligence -->
+<div class="book" data-category="Psikologi Pengembangan Diri">
+    <img src="image/emotional_intelligence.jpg" alt="Emotional Intelligence Cover">
+    <div class="book-content">
+      <h2>Emotional Intelligence</h2>
+      <p><strong>Penulis:</strong> Daniel Goleman</p>
+      <p>Buku ini menjelaskan bagaimana kecerdasan emosional berperan besar dalam kesuksesan, hubungan sosial, dan pengambilan keputusan, bahkan lebih penting dari IQ.</p>
+      <a class="download-btn" href="/path/to/Emotional_Intelligence_Daniel_Goleman.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+<!-- The 48 Laws of Power -->
+<div class="book" data-category="Sosial & Politik Pengembangan Diri">
+    <img src="image/48_laws_of_power.jpg" alt="The 48 Laws of Power Cover">
+    <div class="book-content">
+      <h2>The 48 Laws of Power</h2>
+      <p><strong>Penulis:</strong> Robert Greene</p>
+      <p>Buku ini membongkar strategi kekuasaan dari sejarah dan tokoh-tokoh besar, memberikan panduan praktis bagi siapa pun yang ingin memahami dinamika sosial dan pengaruh.</p>
+      <a class="download-btn" href="/path/to/The_48_Laws_of_Power_Robert_Greene.pdf" download>Download PDF</a>
+    </div>
+  </div>
+
+  <div class="container"></div>
+<!-- Guns, Germs, and Steel -->
+<div class="book" data-category="Sejarah Sains">
+    <img src="image/guns_germs_steel.jpg" alt="Guns, Germs, and Steel Cover">
+    <div class="book-content">
+      <h2>Guns, Germs, and Steel</h2>
+      <p><strong>Penulis:</strong> Jared Diamond</p>
+      <p>Buku ini menjelaskan faktor-faktor lingkungan dan geografis yang membentuk perkembangan peradaban manusia, serta mengapa kekuasaan dan teknologi tidak tersebar merata di dunia.</p>
+      <a class="download-btn" href="/path/to/Guns_Germs_and_Steel_Jared_Diamond.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+<!-- Berani Tidak Disukai -->
+<div class="book" data-category="Psikologi Pengembangan Diri">
+    <img src="image/berani_tidak_disukai.jpg" alt="Berani Tidak Disukai Cover">
+    <div class="book-content">
+      <h2>Berani Tidak Disukai</h2>
+      <p><strong>Penulis:</strong> Ichiro Kishimi & Fumitake Koga</p>
+      <p>Buku ini mengangkat filsafat Adlerian untuk menunjukkan bahwa kebebasan sejati datang dari keberanian menjalani hidup sesuai prinsip diri, meski tak disukai orang lain.</p>
+      <a class="download-btn" href="/path/to/Berani_Tidak_Disukai_Kishimi_Koga.pdf" download>Download PDF</a>
+    </div>
+  </div>
+
+  <div class="container"></div>
+<!-- Bicara Itu Ada Seninya -->
+<div class="book" data-category="Pengembangan Diri Sosial & Politik">
+    <img src="image/bicara_itu_ada_seninya.jpg" alt="Bicara Itu Ada Seninya Cover">
+    <div class="book-content">
+      <h2>Bicara Itu Ada Seninya</h2>
+      <p><strong>Penulis:</strong> Harry W. Katz</p>
+      <p>Buku ini mengajarkan seni berbicara yang efektif, membahas cara-cara berbicara yang bisa mempengaruhi dan membuat audiens merasa dihargai.</p>
+      <a class="download-btn" href="/path/to/Bicara_Itu_Ada_Seninya_Harry_Katz.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+<!-- The Law of Attraction -->
+<div class="book" data-category="Pengembangan Diri Psikologi">
+    <img src="image/the_law_of_attraction.jpg" alt="The Law of Attraction Cover">
+    <div class="book-content">
+      <h2>The Law of Attraction</h2>
+      <p><strong>Penulis:</strong> William Walker Atkinson</p>
+      <p>Buku ini membahas kekuatan pikiran dalam mempengaruhi kehidupan kita, dengan menekankan konsep bahwa kita menarik hal-hal yang sejalan dengan pikiran dan perasaan kita.</p>
+      <a class="download-btn" href="/path/to/The_Law_of_Attraction_William_Walker_Atkinson.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+<!-- Relativity -->
+<div class="book" data-category="Sains Fisika">
+    <img src="image/relativity.jpg" alt="Relativity Cover">
+    <div class="book-content">
+      <h2>Relativity: Teori Khusus and Umum</h2>
+      <p><strong>Penulis:</strong> Albert Einstein</p>
+      <p>Buku ini menjelaskan teori relativitas khusus dan umum dengan cara yang mudah dipahami oleh pembaca umum, meskipun topiknya sangat kompleks dan mendalam.</p>
+      <a class="download-btn" href="/path/to/Relativity_Albert_Einstein.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+<!-- The Mountain Is You -->
+<div class="book" data-category="Pengembangan Diri Psikologi">
+    <img src="image/the_mountain_is_you.jpg" alt="The Mountain Is You Cover">
+    <div class="book-content">
+      <h2>The Mountain Is You</h2>
+      <p><strong>Penulis:</strong> Brianna Wiest</p>
+      <p>Buku ini membahas tentang bagaimana kita bisa mengatasi hambatan internal dan menemukan potensi sejati dengan menghadapi "gunung" yang ada di dalam diri kita sendiri.</p>
+      <a class="download-btn" href="/path/to/The_Mountain_Is_You_Brianna_Wiest.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+<!-- The Psychology of Money -->
+<div class="book" data-category="Ekonomi Psikologi">
+    <img src="image/psychology_of_money.jpg" alt="The Psychology of Money Cover">
+    <div class="book-content">
+      <h2>The Psychology of Money</h2>
+      <p><strong>Penulis:</strong> Morgan Housel</p>
+      <p>Buku ini membahas hubungan antara uang dan perilaku manusia, serta bagaimana cara kita membuat keputusan finansial yang lebih baik dengan memahami psikologi di balik uang.</p>
+      <a class="download-btn" href="/path/to/The_Psychology_of_Money_Morgan_Housel.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+  <!-- Homo Deus -->
+  <div class="book" data-category="Sejarah Sains">
+    <img src="image/homo_deus.jpg" alt="Homo Deus Cover">
+    <div class="book-content">
+      <h2>Homo Deus: A Brief History of Tomorrow</h2>
+      <p><strong>Penulis:</strong> Yuval Noah Harari</p>
+      <p>Buku ini mengeksplorasi masa depan umat manusia, membahas bagaimana teknologi dan bioteknologi dapat mengubah kita menjadi manusia yang lebih unggul, dan apa konsekuensinya bagi peradaban.</p>
+      <a class="download-btn" href="/path/to/Homo_Deus_Yuval_Noah_Harari.pdf" download>Download PDF</a>
+    </div>
+  </div>
+
+  <div class="container"></div>
+<!-- How to Win Friends and Influence People -->
+<div class="book" data-category="Pengembangan Diri Sosial & Politik">
+    <img src="image/how_to_win_friends.jpg" alt="How to Win Friends and Influence People Cover">
+    <div class="book-content">
+      <h2>How to Win Friends and Influence People</h2>
+      <p><strong>Penulis:</strong> Dale Carnegie</p>
+      <p>Buku klasik ini menawarkan prinsip-prinsip dasar untuk meningkatkan keterampilan sosial dan membangun hubungan yang lebih baik dengan orang lain, baik dalam kehidupan pribadi maupun profesional.</p>
+      <a class="download-btn" href="/path/to/How_to_Win_Friends_and_Influence_People_Dale_Carnegie.pdf" download>Download PDF</a>
+    </div>
+  </div>
+
+  <div class="container"></div>
+  <!-- Blink -->
+<div class="book" data-category="Psikologi Sains">
+    <img src="image/blink.jpg" alt="Blink Cover">
+    <div class="book-content">
+      <h2>Blink: The Power of Thinking Without Thinking</h2>
+      <p><strong>Penulis:</strong> Malcolm Gladwell</p>
+      <p>Buku ini mengeksplorasi bagaimana keputusan cepat dan instingtif yang kita buat seringkali lebih akurat daripada keputusan yang dipikirkan secara rasional, serta bagaimana intuisi bekerja dalam otak manusia.</p>
+      <a class="download-btn" href="/path/to/Blink_Malcolm_Gladwell.pdf" download>Download PDF</a>
+    </div>
+  </div>
+
+  <div class="container"></div>
+<!-- Social Intelligence -->
+<div class="book" data-category="Psikologi Sosial & Politik">
+    <img src="image/social_intelligence.jpg" alt="Social Intelligence Cover">
+    <div class="book-content">
+      <h2>Social Intelligence: The New Science of Human Relationships</h2>
+      <p><strong>Penulis:</strong> Daniel Goleman</p>
+      <p>Buku ini mengupas bagaimana kemampuan untuk memahami dan mengelola hubungan sosial memainkan peran penting dalam kesuksesan hidup dan kesehatan emosional, berdasarkan temuan terbaru dalam ilmu saraf dan psikologi.</p>
+      <a class="download-btn" href="/path/to/Social_Intelligence_Daniel_Goleman.pdf" download>Download PDF</a>
+    </div>
+  </div>  
+
+  <div class="container"></div>
+<!-- Stolen Focus -->
+<div class="book" data-category="Psikologi Sains">
+    <img src="image/stolen_focus.jpg" alt="Stolen Focus Cover">
+    <div class="book-content">
+      <h2>Stolen Focus: Why You Can’t Pay Attention—and How to Think Deeply Again</h2>
+      <p><strong>Penulis:</strong> Johann Hari</p>
+      <p>Buku ini membahas bagaimana kemampuan kita untuk fokus dan berpikir mendalam dirampas oleh berbagai faktor modern, termasuk teknologi, gaya hidup, dan sistem sosial, serta bagaimana cara merebutnya kembali.</p>
+      <a class="download-btn" href="/path/to/Stolen_Focus_Johann_Hari.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+<!-- The Secret -->
+<div class="book" data-category="Spiritual Pengembangan Diri">
+    <img src="image/the_secret.jpg" alt="The Secret Cover">
+    <div class="book-content">
+      <h2>The Secret</h2>
+      <p><strong>Penulis:</strong> Rhonda Byrne</p>
+      <p>Buku ini mempopulerkan hukum tarik-menarik (law of attraction), menyatakan bahwa pikiran positif dapat menarik hal-hal positif dalam hidup, dan menawarkan panduan praktis untuk mewujudkan keinginan melalui kekuatan pikiran.</p>
+      <a class="download-btn" href="/path/to/The_Secret_Rhonda_Byrne.pdf" download>Download PDF</a>
+    </div>
+  </div>  
+
+  <div class="container"></div>
+  <!-- Ikigai -->
+<div class="book" data-category="Spiritual Pengembangan Diri">
+    <img src="image/ikigai.jpg" alt="Ikigai Cover">
+    <div class="book-content">
+      <h2>Ikigai: The Japanese Secret to a Long and Happy Life</h2>
+      <p><strong>Penulis:</strong> Héctor García & Francesc Miralles</p>
+      <p>Buku ini mengungkap filosofi hidup masyarakat Jepang dalam menemukan “ikigai” atau alasan untuk bangun di pagi hari, yang dianggap sebagai kunci hidup panjang, sehat, dan bahagia.</p>
+      <a class="download-btn" href="/path/to/Ikigai_Hector_Garcia_Francesc_Miralles.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+<!-- Pale Blue Dot -->
+<div class="book" data-category="Sains Filsafat">
+    <img src="image/pale_blue_dot.jpg" alt="Pale Blue Dot Cover">
+    <div class="book-content">
+      <h2>Pale Blue Dot: A Vision of the Human Future in Space</h2>
+      <p><strong>Penulis:</strong> Carl Sagan</p>
+      <p>Buku ini menawarkan refleksi mendalam tentang tempat manusia di alam semesta, menjelajahi eksplorasi luar angkasa sekaligus memberikan pandangan filosofis mengenai kerendahan hati dan tanggung jawab kita terhadap planet ini.</p>
+      <a class="download-btn" href="/path/to/Pale_Blue_Dot_Carl_Sagan.pdf" download>Download PDF</a>
+    </div>
+  </div>  
+
+  <div class="container"></div>
+<!-- The Warren Buffett Way -->
+<div class="book" data-category="Ekonomi Pengembangan Diri">
+    <img src="image/warren_buffett_way.jpg" alt="The Warren Buffett Way Cover">
+    <div class="book-content">
+      <h2>The Warren Buffett Way</h2>
+      <p><strong>Penulis:</strong> Robert G. Hagstrom</p>
+      <p>Buku ini mengulas prinsip-prinsip investasi yang digunakan Warren Buffett dalam membangun kekayaannya, menawarkan wawasan strategis dan filosofi investasi jangka panjang yang telah terbukti berhasil.</p>
+      <a class="download-btn" href="/path/to/The_Warren_Buffett_Way_Robert_Hagstrom.pdf" download>Download PDF</a>
+    </div>
+  </div>  
+
+  <div class="container"></div>
+<!-- Beresin Dulu Hidupmu -->
+<div class="book" data-category="Pengembangan Diri Psikologi">
+    <img src="image/beresin_dulu_hidupmu.jpg" alt="Beresin Dulu Hidupmu Cover">
+    <div class="book-content">
+      <h2>Beresin Dulu Hidupmu</h2>
+      <p><strong>Penulis:</strong> Fellexandro Ruby</p>
+      <p>Buku ini membahas cara membereskan berbagai aspek kehidupan mulai dari mindset, tujuan hidup, hingga tindakan sehari-hari, agar hidup lebih terarah, produktif, dan bermakna.</p>
+      <a class="download-btn" href="/path/to/Beresin_Dulu_Hidupmu_Fellexandro_Ruby.pdf" download>Download PDF</a>
+    </div>
+  </div>  
+
+  <div class="container"></div>
+<!-- Max Havelaar -->
+<div class="book" data-category="Sejarah Sosial & Politik">
+    <img src="image/max_havelaar.jpg" alt="Max Havelaar Cover">
+    <div class="book-content">
+      <h2>Max Havelaar</h2>
+      <p><strong>Penulis:</strong> Multatuli (Eduard Douwes Dekker)</p>
+      <p>Sebuah karya sastra klasik yang mengecam praktik kolonialisme Belanda di Hindia Belanda, sekaligus menjadi simbol perjuangan keadilan sosial dan kritik tajam terhadap ketidakadilan birokrasi kolonial.</p>
+      <a class="download-btn" href="/path/to/Max_Havelaar_Multatuli.pdf" download>Download PDF</a>
+    </div>
+  </div>  
+
+  <div class="container"></div>
+<!-- Thinking, Fast and Slow -->
+<div class="book" data-category="Psikologi Sains">
+    <img src="image/thinking_fast_and_slow.jpg" alt="Thinking Fast and Slow Cover">
+    <div class="book-content">
+      <h2>Thinking, Fast and Slow</h2>
+      <p><strong>Penulis:</strong> Daniel Kahneman</p>
+      <p>Buku ini mengungkap dua sistem dalam cara berpikir manusia: yang cepat dan intuitif vs. yang lambat dan logis. Kahneman menjelaskan bagaimana bias kognitif dan intuisi memengaruhi pengambilan keputusan kita sehari-hari.</p>
+      <a class="download-btn" href="/path/to/Thinking_Fast_and_Slow_Daniel_Kahneman.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+<!-- Esensialisme: Pentingkan yang Penting Saja -->
+<div class="book" data-category="Pengembangan Diri Psikologi">
+    <img src="image/esensialisme.jpg" alt="Esensialisme Cover">
+    <div class="book-content">
+      <h2>Esensialisme: Pentingkan yang Penting Saja</h2>
+      <p><strong>Penulis:</strong> Greg McKeown</p>
+      <p>Buku ini mengajarkan cara hidup lebih fokus dengan memprioritaskan yang benar-benar penting dan menghilangkan hal-hal yang tidak perlu, untuk mencapai hasil yang maksimal dengan usaha yang lebih sedikit.</p>
+      <a class="download-btn" href="/path/to/Esensialisme_Greg_McKeown.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  <div class="container"></div>
+<!-- The Metamorphosis -->
+<div class="book" data-category="Filsafat Sastra">
+    <img src="image/the_metamorphosis.jpg" alt="The Metamorphosis Cover">
+    <div class="book-content">
+      <h2>The Metamorphosis</h2>
+      <p><strong>Penulis:</strong> Franz Kafka</p>
+      <p>Buku ini mengisahkan Gregor Samsa yang tiba-tiba berubah menjadi serangga raksasa, menggambarkan alienasi, krisis eksistensial, dan keterasingan manusia dalam dunia modern yang terasingkan.</p>
+      <a class="download-btn" href="/path/to/The_Metamorphosis_Franz_Kafka.pdf" download>Download PDF</a>
+    </div>
+  </div>
+
+  <div class="container"></div>
+  <!-- Pelajaran untuk Abad ke-21 -->
+<div class="book" data-category="Sains Filsafat Sosial & Politik">
+    <img src="image/pelajaran_untuk_abad_ke_21.jpg" alt="Pelajaran untuk Abad ke-21 Cover">
+    <div class="book-content">
+      <h2>Pelajaran untuk Abad ke-21</h2>
+      <p><strong>Penulis:</strong> Yuval Noah Harari</p>
+      <p>Buku ini mengupas tantangan global yang dihadapi umat manusia, seperti kemajuan teknologi, revolusi industri 4.0, masalah sosial-politik, dan bagaimana kita harus mempersiapkan diri untuk masa depan yang penuh ketidakpastian.</p>
+      <a class="download-btn" href="/path/to/Pelajaran_untuk_Abad_ke_21_Yuval_Noah_Harari.pdf" download>Download PDF</a>
+    </div>
+  </div>
+  
+  
+
 
   <script>
     function searchBooks() {
@@ -118,6 +542,20 @@
         book.style.display = text.includes(input) ? '' : 'none';
       });
     }
+
+    function filterCategory() {
+        const selectedCategory = document.getElementById('category-select').value;
+        const books = document.querySelectorAll('.book');
+      
+        books.forEach(book => {
+          const categories = book.getAttribute('data-category').toLowerCase().split(/[\s,]+/); // pisahkan dengan spasi atau koma
+          if (selectedCategory === 'all' || categories.includes(selectedCategory)) {
+            book.style.display = '';
+          } else {
+            book.style.display = 'none';
+          }
+        });
+      }
   </script>
 </body>
 </html>
