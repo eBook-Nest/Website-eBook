@@ -149,7 +149,41 @@
         color: #39FF14;
         box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14;
       }
+      @media (max-width: 768px) {
+        .book {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
       
+        .book-content {
+          border-left: none;
+          padding-left: 0;
+          margin-top: 15px;
+        }
+      
+        .book img {
+          width: 60%;
+          max-width: 200px;
+        }
+      
+        .button-container {
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+        }
+      
+        .download-btn,
+        .deskripsi-btn {
+          width: 90%;
+          max-width: 300px;
+          text-align: center;
+        }
+      
+        #search-input {
+          width: 90%;
+        }
+      }
       
   </style>
 </head>
@@ -746,12 +780,12 @@
     </div>  
   </div>  
   
-  <div class="book" data-category="Filsafat, Psikologi">
+  <div class="book" data-category="Filsafat, Psikologi, novel">
     <img src="image/the_metamorphosis.jpg" loading="lazy" alt="The Metamorphosis Cover">
     <div class="book-content">
       <h2>The Metamorphosis</h2>
       <p><strong>Penulis:</strong> Franz Kafka</p>
-      <p><strong>Tag:</strong> Filsafat, Psikologi</p>
+      <p><strong>Tag:</strong> Filsafat, Psikologi, Novel</p>
       <div class="button-container">
           <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
           <div>
