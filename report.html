@@ -1,0 +1,117 @@
+<style>
+    .comment-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #0d0d0d;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #ffffff20;
+  }
+  
+  .comment-section h3 {
+    color: #ffffff;
+    text-shadow: 0 0 5px #777777, 0 0 10px #ffffff;
+  }
+  
+  .comment-section textarea {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    resize: none;
+    font-size: 14px;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    box-shadow: 0 0 5px #ffffff50;
+  }
+  
+  .comment-section button {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-shadow: 0 0 5px #ffffff;
+    transition: 0.3s;
+  }
+  
+  .comment-section button:hover {
+    background-color: #ffffff;
+    color: #0d0d0d;
+    box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
+  }
+  
+  #comments-display {
+    margin-top: 20px;
+  }
+  
+  .comment {
+    background-color: #1a1a1a;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    border-left: 3px solid #ffffff;
+    color: #ffffff;
+    box-shadow: 0 0 10px #ffffff20;
+  }
+  
+  .comment-time {
+    font-size: 12px;
+    color: #aaaaaa;
+    margin-top: 5px;
+    text-shadow: 0 0 2px #ffffff60;
+  }
+</style>
+  <div class="comment-section">
+  <h3>💬 Tinggalkan Komentar</h3>
+  <textarea id="comment-input" placeholder="Tulis komentarmu di sini..."></textarea>
+  <button onclick="submitComment()">Kirim</button>
+  
+  <div id="comments-display"></div>
+</div>
+
+<script>
+   // Saat halaman dimuat, tampilkan komentar yang tersimpan
+document.addEventListener("DOMContentLoaded", function () {
+    const savedComments = JSON.parse(localStorage.getItem("comments")) || [];
+    savedComments.forEach(comment => {
+      addCommentToDisplay(comment.text, comment.time);
+    });
+  });
+  
+  function submitComment() {
+    const input = document.getElementById('comment-input');
+    const commentText = input.value.trim();
+  
+    if (commentText === '') return;
+  
+    const now = new Date();
+    const timeString = now.toLocaleString('id-ID'); // Format waktu Indonesia
+  
+    // Tampilkan komentar
+    addCommentToDisplay(commentText, timeString);
+  
+    // Simpan ke localStorage
+    const savedComments = JSON.parse(localStorage.getItem("comments")) || [];
+    savedComments.push({ text: commentText, time: timeString });
+    localStorage.setItem("comments", JSON.stringify(savedComments));
+  
+    input.value = '';
+  }
+  
+  function addCommentToDisplay(text, time) {
+    const commentHTML = `
+      <div class="comment">
+        <p>${text}</p>
+        <div class="comment-time">🕒 ${time}</div>
+      </div>
+    `;
+    document.getElementById('comments-display').innerHTML += commentHTML;
+  }
+  
+</script>
+
