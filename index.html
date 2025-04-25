@@ -184,17 +184,54 @@
           width: 90%;
         }
       }
+      .report-btn {
+        display: inline-block;
+        padding: 6px 12px;
+        font-size: 12px;
+        background-color: #000000;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 5px #8d8d8d, 0 0 10px #7a7a7a;
+      }
+      
+      .report-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.4s ease;
+      }
+      
+      .report-btn:hover::before {
+        left: 100%;
+      }
+      
+      .report-btn:hover {
+        background-color: #000000;
+        box-shadow: 0 0 10px #474747, 0 0 20px #3f3f3f, 0 0 30px #4d4d4d;
+        color: #fff;
+      }      
       
   </style>
 </head>
+<meta name="google-site-verification" content="iGHWXJ6QGoOAGI5SW7JppTiqOQ1_75Zgljt8TFJwiZ8" />
 <body>
   <header>
-    <h1>eBook Nest</h1>
+    <h1>eBook Nest 🕮</h1>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </header>
 
   <div class="search-container">
-    <input type="text" id="search-input" placeholder="Cari buku atau penulis..." onkeyup="searchBooks()"> total : 2 buku
+    <input type="text" id="search-input" placeholder="Cari buku atau penulis..." onkeyup="searchBooks()">
   </div>
 
   <div class="category-container">
@@ -213,7 +250,8 @@
       <option value="novel">Novel</option>
       <!-- Tambahkan kategori lain sesuai kebutuhan -->
     </select>
-  </div>
+        <a href="report.html" class="report-btn"> Contact ✉</a>
+    </div>
 
   <div class="container">
     <div class="book"data-category="Sejarah Sains filsafat"> 
@@ -225,7 +263,7 @@
         <div class="button-container">
             <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
 <div>
-    <a class="download-btn" href="/path/to/Sapiens_Yuval_Noah_Harari.pdf" download>Download PDF</a>
+    <a class="download-btn" href="https://cuty.io/DmKdctQb" download>Download PDF</a>
           </div>
           <div class="description">
             Di awal, buku ini menjelaskan bagaimana terjadinya tiga peristiwa besar yang membentuk peradaban manusia hingga bisa sampai pada titik seperti saat sekarang ini. Yaitu revolusi kognitif, revolusi agrikultur dan revolusi ilmu pengetahuan.
@@ -467,7 +505,7 @@
       <div class="button-container">
           <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
           <div>
-            <a class="download-btn" href="/path/to/Bicara_Itu_Ada_Seninya.pdf" download>Download PDF</a>
+            <a class="download-btn" href="https://cuty.io/jHytZd62pG" download>Download PDF</a>
           </div>
           <div class="description">
             Buku ini membahas pentingnya keterampilan berbicara dalam kehidupan sehari-hari. Dengan mengajarkan seni berbicara yang efektif, buku ini memberikan wawasan tentang cara memilih kata yang tepat, intonasi yang sesuai, serta bagaimana bahasa tubuh dan kepercayaan diri memainkan peran penting dalam komunikasi. Buku ini cocok bagi siapa saja yang ingin meningkatkan keterampilan komunikasi mereka, baik dalam hubungan personal maupun profesional.
@@ -559,7 +597,7 @@
       <div class="button-container">
           <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
           <div>
-            <a class="download-btn" href="/path/to/Homo_Deus.pdf" download>Download PDF</a>
+            <a class="download-btn" href="https://cuty.io/MRBzADmh" download>Download PDF</a>
           </div>
           <div class="description">
             "Homo Deus" mengisahkan pandangan masa depan umat manusia di mana teknologi dan kecerdasan buatan (AI) akan mengubah esensi kehidupan manusia. Harari menyelidiki kemungkinan peran manusia sebagai 'dewa' di masa depan dengan kemampuan untuk mengendalikan kehidupan, kematian, dan evolusi melalui teknologi. Buku ini menggali topik seperti transhumanisme, etika teknologi, dan potensi bahaya yang muncul dari pengembangan teknologi yang semakin canggih. Harari juga mempertanyakan apakah pencapaian manusia ini akan membawa kebahagiaan atau justru menciptakan tantangan baru yang lebih besar.
@@ -568,23 +606,6 @@
     </div>  
   </div>
   
-  <div class="book" data-category="Pengembangan Diri, Psikologi, Sosial & Politik">
-    <img src="image/how_to_win_friends_and_influence_people.jpg" loading="lazy" alt="How to Win Friends and Influence People Cover">
-    <div class="book-content">
-      <h2>How to Win Friends and Influence People</h2>
-      <p><strong>Penulis:</strong> Dale Carnegie</p>
-      <p><strong>Tag:</strong> Pengembangan Diri, Psikologi, Sosial & Politik</p>
-      <div class="button-container">
-          <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
-          <div>
-            <a class="download-btn" href="/path/to/How_to_Win_Friends.pdf" download>Download PDF</a>
-          </div>
-          <div class="description">
-            "How to Win Friends and Influence People" adalah buku klasik yang mengajarkan keterampilan komunikasi dan interaksi sosial. Dale Carnegie memberikan tips dan teknik praktis tentang bagaimana membangun hubungan yang kuat, mempengaruhi orang lain, dan mengatasi konflik secara positif. Buku ini mencakup prinsip-prinsip penting seperti cara mendengarkan orang lain dengan empati, memberikan pujian yang tulus, serta membangun rasa saling percaya. Buku ini sangat berguna bagi siapa saja yang ingin meningkatkan keterampilan interpersonal mereka dalam berbagai aspek kehidupan, baik dalam hubungan pribadi maupun profesional.
-          </div>  
-      </div>  
-    </div>  
-  </div>
   
   <div class="book" data-category="Psikologi, Pengembangan Diri, Sains">
     <img src="image/blink_the_power_of_thinking_without_thinking.jpg" loading="lazy" alt="Blink: The Power of Thinking Without Thinking Cover">
@@ -603,19 +624,27 @@
       </div>  
     </div>  
   </div>
-  
-  <div class="container"></div>
+
+
 <!-- Social Intelligence -->
-<div class="book" data-category="Psikologi Sosial & Politik sains">
-    <img src="image/social_intelligence.jpg" loading="lazy" alt="Social Intelligence Cover">
-    <div class="book-content">
-      <h2>Social Intelligence: The New Science of Human Relationships</h2>
-      <p><strong>Penulis:</strong> Daniel Goleman</p>
-      <p><strong>Tag:</strong> Psikologi, Pengembangan Diri, Sains, sosial & politik</p>
-      <p>Buku ini mengupas bagaimana kemampuan untuk memahami dan mengelola hubungan sosial memainkan peran penting dalam kesuksesan hidup dan kesehatan emosional, berdasarkan temuan terbaru dalam ilmu saraf dan psikologi.</p>
-      <a class="download-btn" href="/path/to/Social_Intelligence_Daniel_Goleman.pdf" download>Download PDF</a>
+<div class="book" data-category="Psikologi, Pengembangan Diri, Sains, Sosial & Politik">
+  <img src="image/social_intelligence.jpg" loading="lazy" alt="Social Intelligence Cover">
+  <div class="book-content">
+    <h2>Social Intelligence: The New Science of Human Relationships</h2>
+    <p><strong>Penulis:</strong> Daniel Goleman</p>
+    <p><strong>Tag:</strong> Psikologi, Pengembangan Diri, Sains, Sosial & Politik</p>
+    <div class="button-container">
+      <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+      <div>
+        <a class="download-btn" href="/path/to/Social_Intelligence_Daniel_Goleman.pdf" download>Download PDF</a>
+      </div>
+      <div class="description">
+        Buku ini menjelaskan bagaimana kecerdasan sosial — kemampuan untuk berinteraksi secara efektif dengan orang lain — memainkan peran penting dalam kesuksesan pribadi dan profesional. Daniel Goleman membedah cara otak manusia bereaksi dalam hubungan sosial, serta bagaimana empati, kasih sayang, dan hubungan yang sehat memengaruhi kesehatan dan kesejahteraan secara keseluruhan. Dengan riset ilmiah dan studi kasus, buku ini mengungkap bahwa kecerdasan sosial bukan hanya penting, tapi bisa dikembangkan.
+      </div>
     </div>
-  </div>  
+  </div>
+</div>
+
 
   <div class="book" data-category="Psikologi, Pengembangan Diri, Sosial">
     <img src="image/stolen_focus.jpg" loading="lazy" alt="Stolen Focus Cover">
@@ -745,7 +774,7 @@
   </div>
 
   <div class="book" data-category="Psikologi, Sains">
-    <img src="image/thinking_fast_and_slow" loading="lazy" .jpg  alt="Thinking, Fast and Slow Cover">
+    <img src="image/thinking_fast_and_slow.jpg" loading="lazy" .jpg  alt="Thinking, Fast and Slow Cover">
     <div class="book-content">
       <h2>Thinking, Fast and Slow</h2>
       <p><strong>Penulis:</strong> Daniel Kahneman</p>
@@ -797,7 +826,7 @@
       </div>  
     </div>  
   </div>
-  
+
   <div class="book" data-category="Sejarah, Filsafat, Sains,">
     <img src="image/pelajaran_untuk_abad_ke_21.jpg" loading="lazy" alt="Pelajaran untuk Abad ke-21 Cover">
     <div class="book-content">
@@ -815,6 +844,25 @@
       </div>  
     </div>  
   </div>
+  
+  <div class="book" data-category="Filsafat, Sains, Agama">
+    <img src="image/the_god_delusion.jpg" loading="lazy" alt="The God Delusion Cover">
+    <div class="book-content">
+      <h2>The God Delusion</h2>
+      <p><strong>Penulis:</strong> Richard Dawkins</p>
+      <p><strong>Tag:</strong> Filsafat, Sains, Agama</p>
+      <div class="button-container">
+        <button class="download-btn deskripsi-btn" onclick="toggleDeskripsi(this)">Deskripsi</button>
+        <div>
+          <a class="download-btn" href="https://cuty.io/IWP2IgY4Xs" download>Download PDF</a>
+        </div>
+        <div class="description">
+          *The God Delusion* adalah karya kontroversial dari Richard Dawkins yang mengkritik keyakinan religius dan mengadvokasi ateisme. Dalam buku ini, Dawkins mengemukakan argumen ilmiah dan filosofis terhadap keberadaan Tuhan serta menjelaskan bagaimana agama telah memengaruhi masyarakat sepanjang sejarah. Ia juga menyoroti dampak negatif dari dogma religius terhadap kebebasan berpikir, pendidikan, dan perkembangan ilmu pengetahuan. Buku ini mendorong pembaca untuk berpikir kritis, skeptis, dan mengedepankan rasionalitas dalam memahami dunia.
+        </div>  
+      </div>  
+    </div>  
+  </div>
+  
   
   
 
