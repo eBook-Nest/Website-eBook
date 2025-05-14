@@ -49,6 +49,7 @@
       width: 300px;
       height: 300px;
       pointer-events: none;
+      z-index: 1;
     }
     .segment-labels span {
       position: absolute;
@@ -58,6 +59,7 @@
       transform-origin: bottom center;
       text-shadow: 1px 1px 2px #000;
       font-size: 14px;
+      color: #fff;
     }
     .pointer {
       margin: auto;
@@ -68,6 +70,7 @@
       border-bottom: 30px solid #fff;
       position: relative;
       top: -20px;
+      z-index: 2;
     }
     button {
       padding: 15px 30px;
@@ -78,6 +81,8 @@
       color: white;
       cursor: pointer;
       margin-top: 20px;
+      position: relative;
+      z-index: 3;
     }
     #result {
       font-size: 2em;
@@ -88,7 +93,7 @@
   </style>
 </head>
 <body>
-  <h1>🎉 Selamat Anda Akan Mendapat WL! 🎉</h1>
+  <h1>🎉 Selamat Anda Telah Mendapakan World Lock 🔒! 🎉</h1>
   <div class="roulette-container">
     <div class="pointer"></div>
     <div id="wheel">
@@ -143,14 +148,14 @@
 
     // Cegah reload ulang untuk curang
     if (localStorage.getItem('hasSpun') === 'true') {
-        document.body.innerHTML = '<h1 style="color:red; margin-top:50px;">❌ ERROR: Anda telah memutar roulete. Tidak dapat mengakses ulang.</h1>';
-        throw new Error("Roulette sudah digunakan.");
+      document.body.innerHTML = '<h1 style="color:red; margin-top:50px;">❌ ERROR: Anda telah memutar roulete. Tidak dapat mengakses ulang.</h1>';
+      throw new Error("Roulette sudah digunakan.");
     }
 
     spinBtn.addEventListener('click', () => {
       if (hasSpun) return;
       hasSpun = true;
-      localStorage.setItema('hasSpun', 'true');
+      localStorage.setItem('hasSpun', 'true');
 
       const selected = getRandomPrizeIndex();
       const anglePerSegment = 360 / prizes.length;
