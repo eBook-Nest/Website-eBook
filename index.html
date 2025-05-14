@@ -7,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-family: 'Times New Roman', serif;
       background: #121212;
       text-align: center;
       color: #fff;
@@ -40,7 +40,7 @@
         #2c3e50 77.77% 88.88%,
         #16a085 88.88% 100%
       );
-      transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
+      transition: transform 6s cubic-bezier(0.33, 1, 0.68, 1);
     }
     .segment-labels {
       position: absolute;
@@ -53,13 +53,15 @@
     }
     .segment-labels span {
       position: absolute;
-      width: 100px;
-      left: 100px;
-      top: 0;
+      width: 60px;
       transform-origin: bottom center;
+      left: 50%;
+      top: 50%;
+      margin-left: -30px;
       text-shadow: 1px 1px 2px #000;
-      font-size: 14px;
+      font-size: 12px;
       color: #fff;
+      text-align: center;
     }
     .pointer {
       margin: auto;
@@ -86,14 +88,29 @@
     }
     #result {
       font-size: 2em;
-      margin-top: 30px;
       color: #00e5ff;
       text-shadow: 1px 1px #000;
+      animation: popin 0.6s ease-out;
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #00e5ff;
+      z-index: 4;
+    }
+    @keyframes popin {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1); }
     }
   </style>
 </head>
 <body>
-  <h1>🎉 Selamat Anda Telah Mendapakan World Lock 🔒! 🎉</h1>
+  <h1>🎉 Selamat!!! Putar Roulettenya untuk mendapatkan World Lock 🔒! 🎉</h1>
   <div class="roulette-container">
     <div class="pointer"></div>
     <div id="wheel">
@@ -114,23 +131,23 @@
     ];
 
     const probabilities = [
-      0.5,  // 50% untuk 1 WL
-      0.4,  // 40% untuk 2 WL
-      0.05, // 5% untuk 5 WL
-      0.05, // 5% untuk 6 WL
-      0.0,  // 0% untuk 20 WL
-      0.0,  // 0% untuk 40 WL
-      0.0,  // 0% untuk 80 WL
-      0.0,  // 0% untuk 100 WL
-      0.0   // 0% untuk 200 WL
+      0.5,
+      0.4,
+      0.05,
+      0.05,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
     ];
 
-    // Tambah label ke setiap segmen
+    // Tambah label ke setiap segmen sesuai posisi
     prizes.forEach((prize, index) => {
-      const angle = (360 / prizes.length) * index;
       const span = document.createElement('span');
+      const angle = (360 / prizes.length) * index;
       span.innerText = prize;
-      span.style.transform = `rotate(${angle}deg) translateY(10px)`;
+      span.style.transform = `rotate(${angle}deg) translateY(-130px) rotate(${-angle}deg)`;
       labels.appendChild(span);
     });
 
@@ -141,21 +158,29 @@
         total += probabilities[i];
         if (r <= total) return i;
       }
-      return 0; // fallback
+      return 0;
     }
 
     let hasSpun = false;
 
-    // Cegah reload ulang untuk curang
-    if (localStorage.getItem('hasSpun') === 'true') {
-      document.body.innerHTML = '<h1 style="color:red; margin-top:50px;">❌ ERROR: Anda telah memutar roulete. Tidak dapat mengakses ulang.</h1>';
-      throw new Error("Roulette sudah digunakan.");
+    const spinCooldownMinutes = 3;
+    const lastSpin = localStorage.getItem('lastSpin');
+    if (lastSpin) {
+      const elapsed = (Date.now() - parseInt(lastSpin)) / 60000;
+      if (elapsed < spinCooldownMinutes) {
+        document.body.innerHTML = '<h1 style="color:red; margin-top:50px;">❌ ERROR: Anda telah memutar roulete.</h1>';
+        throw new Error("Roulette sudah digunakan.");
+      } else {
+        localStorage.removeItem('hasSpun');
+        localStorage.removeItem('lastSpin');
+      }
     }
 
     spinBtn.addEventListener('click', () => {
       if (hasSpun) return;
       hasSpun = true;
       localStorage.setItem('hasSpun', 'true');
+      localStorage.setItem('lastSpin', Date.now().toString());
 
       const selected = getRandomPrizeIndex();
       const anglePerSegment = 360 / prizes.length;
@@ -165,7 +190,9 @@
 
       setTimeout(() => {
         result.innerHTML = `🎁 Anda mendapatkan: <strong>${prizes[selected]}</strong>! 🎁<br><br><span style="color:yellow; font-size: 1rem;">Segera screenshot hasil roulete ini dan kirim ke admin agar hadiah segera diproses.</span>`;
-      }, 5500);
+        result.style.display = 'block';
+        result.style.animation = 'popin 0.6s ease-out';
+      }, 6000);
     });
   </script>
 </body>
